@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def index
+    @users = User.paginate(:per_page => 18, :page => params[:page])
   end
 
   def show
@@ -17,7 +18,7 @@ class UsersController < ApplicationController
     else
       flash[:notice] = "Oops. Can't save that user."
     end
-    redirect_to :back
+    redirect_to users_path
   end
 
   def edit
