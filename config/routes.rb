@@ -1,5 +1,6 @@
 Sirocco::Application.routes.draw do
   resources :users
+  resources :sessions, :only => [:new, :create, :destroy]
 
   # Sample resource route with options:
   #   resources :products do
@@ -28,8 +29,9 @@ Sirocco::Application.routes.draw do
   #   end
 
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+  match '/signup',  :to => 'users#new'
+  match '/signin',  :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
+  root :to => "pages#front"
 
 end
