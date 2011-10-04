@@ -144,7 +144,10 @@ describe "Existing user signin" do
     fill_in   "Password", :with => user.password
   
     click_button "Sign"
-    page.should have_selector("a", :href => signin_path, :content => "Sign out")
+    page.should have_selector('nav li a', :href => signin_path, :content => "Sign out")
+    page.should have_selector('nav li',:content => user.name)
+    page.should have_selector('nav li img', :class => 'gravatar')
+    save_and_open_page
     
   end
 
@@ -158,7 +161,7 @@ describe "Existing user signin" do
     click_button "Sign"
     page.should have_selector("div.flash.error", :text =~ /invalid/i)        
     page.should have_selector('title', :content => "Sign in")
-    page.should have_selector("a", :href => signin_path, :content => "Sign in")
+    page.should have_selector("nav li a", :href => signin_path, :content => "Sign in")
   end
 
 end
