@@ -1,0 +1,19 @@
+	<a href="#"><img class="system_logo round" src="/images/logo.png"></a>
+	  <nav class="round">
+		  <ul>
+		  <% if signed_in? %>
+			<li>
+			<a href="<%= edit_user_path(current_user) %>",>
+			  <span class="user_name" >
+			    <%= current_user.name %>
+			  </span>
+		    </a>
+			</li>
+		  <% end %>
+		  <% if signed_in? %>			
+			  <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
+		  <% else %>
+			  <li><%= link_to "Sign in", signin_path %></li>
+		  <% end %>
+		</ul>
+	  </nav>

@@ -1,0 +1,12 @@
+<% if signed_in? %>
+  <p>
+	render users home page
+  </p>	
+<% else %>
+  <p>
+	This is the 
+	<%= link_to('Sirocco','#') %>
+	planning application.
+  </p>
+  <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+<% end %>
