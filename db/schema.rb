@@ -10,7 +10,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110930020139) do
+ActiveRecord::Schema.define(:version => 20111005012528) do
+
+  create_table "accounts", :force => true do |t|
+    t.string   "name"
+    t.integer  "created_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "suspend_at"
+    t.datetime "delete_at"
+  end
+
+  create_table "sponsorships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "account_id"
+    t.integer  "created_by"
+    t.boolean  "admin",      :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "enroll_at"
+    t.datetime "suspend_at"
+    t.datetime "delete_at"
+  end
+
+  add_index "sponsorships", ["account_id"], :name => "index_sponsorships_on_account_id"
+  add_index "sponsorships", ["user_id"], :name => "index_sponsorships_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

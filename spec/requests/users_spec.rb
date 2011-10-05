@@ -15,12 +15,16 @@ describe "New user signup" do
         fill_in   "Email",            :with => "kevin.kelly@keltex.com"
         fill_in   "Password",         :with => "foobar"
         fill_in   "Confirm Password", :with => "foobar"
+        fill_in   "Account",          :with => "Kevin Kelly's Account"
         
-        click_button "Sign"                
+        click_button "Sign up"                
         page.should have_selector("div.flash.success", :text =~ /Welcome/)        
-        page.should have_selector('li', :text => "Sign out")
-        page.should have_selector('li', :text => "keltex")   
-        
+        page.should have_selector('nave li', :text => "Sign out")
+
+        fill_in "project_name", :with => "First!"
+        click_button "Create"
+        page.should have_selector("div.flash.success", :text =~ /First/i)        
+                
     end
   end #signup happy path
 
@@ -132,7 +136,7 @@ describe "New user signup" do
   end  
 end #New user
 
-describe "Existing user signin" do
+describe "User signin" do
   it "should allow an existing user to sign in" do
     user = Factory(:user)
     visit root_path               
