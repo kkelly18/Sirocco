@@ -1,6 +1,20 @@
 Sirocco::Application.routes.draw do
-  resources :users
+
+  resources :users do
+    member do
+      get :accounts
+    end
+  end
+
   resources :sessions, :only => [:new, :create, :destroy]
+
+  resources :accounts do
+    member do
+      get :team_members
+    end
+  end  
+  
+  resources :sponsorships
 
   # Sample resource route with options:
   #   resources :products do

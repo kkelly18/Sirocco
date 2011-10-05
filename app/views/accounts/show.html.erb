@@ -1,0 +1,30 @@
+<table>
+	<h1><a><%=@account.name%></a></h1>
+
+    <div class="span-24">
+	<nav class="product">
+	<ul>
+		<li><%= link_to 'Home', root_path %></li>
+	</ul>
+	</nav>
+	</div>
+	<br />
+
+	<div class="action span-24">
+	<nav class="action">
+		<ul>
+			<li><%= link_to 'SHOW USERS', 'invite_user' %></li>
+		</ul>
+	</nav>
+	</div>
+	
+	<tr>
+		<td class="round">
+			render 'projects/new_project' %>
+		</td>
+		<td>
+			render 'projects/index' %>
+		</td>
+	</tr>
+	
+</table>

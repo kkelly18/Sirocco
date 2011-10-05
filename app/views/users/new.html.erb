@@ -34,7 +34,15 @@
 		<%= f.password_field :password_confirmation %>
 		</div>
 	</div>
+	<div class="field">
+		<div>
+		<%= f.label :personal_account_name, "Account Name" %>
+    	</div>
+	    <div>
+		<%= f.text_field :personal_account_name %>
+		</div>
+	</div>
 	<div class='actions'>
-		<%= f.submit "Sign Up" %>
+		<%= f.submit "Sign up" %>
 	</div>
 <% end %>

@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     
     if @user.save
       sign_in @user      
-      redirect_to users_path, :flash => {:success => "Welcome #{params[:user][:name]}!"}
+      redirect_to  @user.personal_account, :flash => {:success => "Welcome #{params[:user][:name]}!"}
     else
       render 'new'
     end

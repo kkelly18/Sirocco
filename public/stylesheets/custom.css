@@ -10,23 +10,11 @@ header {
 }
 
 header img.system_logo {	
-	padding: 1em;
+	padding: 0.5em;
 	background: #7C8C74;
 	text-indent: -5000px;
 	width: 30%;	
 }
-
-section {
-	padding: 1%;
-	font-size: 120%;
-	background: #fff;
-}
-
-section h1 {
-	font-size: 180%;
-}
-
-/* links */
 
 a {
 	color: #09c;
@@ -42,12 +30,19 @@ a:visited {
 	color: #069;
 }
 
-/* Core nav */
+section {
+	padding: 1%;
+	background: #fff;
+}
+
+section h1 a {
+	color: black;
+}
 
 nav {
 	float: right;
 	background: white;
-	padding: 0 0.7em;
+	padding: 0 0.2	em;
 	white-space: nowrap;
 }
 
@@ -89,11 +84,6 @@ a.signup_button {
 	font-size: 150%;
 	font-weight: bold;
 	padding: 20px;
-}
-
-.profile img.gravatar {
-	border: 1px solid #999;
-	margin-bottom: -15px;
 }
 
 
@@ -158,3 +148,38 @@ ul.users {
 	list-style: none;
 }
 /* end users index */
+
+/* products Nav */
+nav.product {	
+	float: left;
+	background: white;
+	margin: 0;
+	padding: 0.2em;
+}
+
+nav.product ul li a {
+	color: black;
+}
+/* end products Nav */
+
+/* actions Nav */
+div.action {
+	background: #BEBEBE;
+	margin: 0.2em;
+}
+
+nav.action {	
+	float: right;
+	background: #BEBEBE;
+	margin: 0;
+	padding: 0.2em;
+}
+
+nav.action ul li a {
+	font-size: smaller;
+	color: black;
+}
+/* end actions Nav */
+
+/* grid item */
+/* end grid item */
