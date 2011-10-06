@@ -16,3 +16,11 @@ Factory.define :project do |p|
   p.created_by   1
   p.account_id   1
 end
+
+Factory.define :sponsorship do | s |
+  s.created_by  1
+end
+
+Factory.define :membership do | m |
+  m.created_by  1
+end

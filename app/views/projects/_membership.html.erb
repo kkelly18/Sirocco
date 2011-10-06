@@ -1,0 +1,14 @@
+<tr>
+  <td class="index_item">
+    <span class="item_link" >
+      <%= membership.project.name %>
+    </span>
+	<span class="item_commands" >
+	  <%= render :partial => 'projects/membership_command', :collection => membership_commands(membership) %>	  
+	</span>
+    <br/>
+	<span class="item_status">
+	  <%= membership_status(membership) %>
+	</span>
+  </td>
+</tr>

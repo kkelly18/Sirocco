@@ -1,0 +1,11 @@
+<h1><%= @project.name %></h1>
+
+<% if @project.team_members.count > 0 %>
+  <%= will_paginate @team_members %>
+
+  <ul class="users">
+   	<%= render :partial => "team_member", :collection => @team_members %>
+  </ul>
+		
+  <%= will_paginate @team_members %>
+<% end %>

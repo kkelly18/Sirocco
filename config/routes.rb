@@ -11,10 +11,19 @@ Sirocco::Application.routes.draw do
   resources :accounts do
     member do
       get :team_members
+      get :projects
     end
   end  
   
   resources :sponsorships
+
+  resources :projects do
+    member do
+      get :team_members
+    end
+  end  
+  
+  resources :memberships, :only => [:update]
 
   # Sample resource route with options:
   #   resources :products do

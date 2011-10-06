@@ -21,9 +21,9 @@ describe "New user signup" do
         page.should have_selector("div.flash.success", :text => "Welcome")        
         page.should have_selector('nav li', :text => "Sign out")
 
-        #fill_in "project_name", :with => "First!"
-        #click_button "Create"
-        #page.should have_selector("div.flash.success", :text =~ /First/i)        
+        fill_in "project_name", :with => "First!"
+        click_button "Create"
+        page.should have_selector("div.flash.success", :text => "First")        
                 
     end
   end #signup happy path

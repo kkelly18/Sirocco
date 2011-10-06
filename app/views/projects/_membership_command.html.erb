@@ -1,0 +1,6 @@
+<%= link_to membership_command[:text], url_for( :controller => membership_command[:controller], 
+											    :action => membership_command[:action], 
+											    :id => membership_command[:id],
+											    :command => membership_command[:command],
+											    :only_path => true),
+									 			:method => :put%>

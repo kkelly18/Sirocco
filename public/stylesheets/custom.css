@@ -185,4 +185,43 @@ nav.action ul li a {
 /* end actions Nav */
 
 /* grid item */
+td.main {
+	width: 70%;
+	padding: 1em;
+}
+
+td.sidebar {
+	width: 30%;
+	padding: 1em;
+	vertical-align: top;
+}
+
+.index_grid {
+  margin-top: 1em;
+}
+
+.index_grid_row {
+  height:         70px;
+  border-top:     1px solid #ccc;
+  vertical-align: top;
+  padding-top:    10px;	
+}
+
+.item_link {	
+  display:   inline;
+  font-size: larger;
+  font-weight: bold;
+  color:     #666;
+}
+
+.item_status {
+  display:   inline; 
+  font-style: italic;
+  color:     #666;
+}
+
+.item_commmands {	
+  font-size: 33%;
+  color:     black;
+}
 /* end grid item */

@@ -49,9 +49,13 @@ class User < ActiveRecord::Base
     (user && user.salt == cookie_salt) ? user : nil
   end
 
+  def account_admin?(account)
+    sponsorships.find_by_account_id(account).admin
+  end
+
   def account_projects(account)
     project_array = calc_account_projects(account)
-    project_associations.in_the_set_of(project_array)
+    memberships.in_the_set_of(project_array)
 
     #example usage 
     #project_list = current_user.account_projects (current_account)
@@ -61,9 +65,9 @@ class User < ActiveRecord::Base
   def query_memberships(account=nil)
     if account
       project_array = calc_account_projects(account)
-      return project_associations.in_the_set_of(project_array)
+      return memberships.in_the_set_of(project_array)
     else
-      return project_associations.all
+      return memberships.all
     end
   end
 
@@ -88,7 +92,7 @@ class User < ActiveRecord::Base
 
   def calc_account_projects (account)
 
-    u = self.project_associations
+    u = self.memberships
     u_array = []
     u.each {|s| u_array << s.project_id}
 
