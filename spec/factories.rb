@@ -10,3 +10,9 @@ Factory.define :account do |a|
  a.sequence(:name) {|n| "Faux Account#{n}" }
  a.created_by 1
 end
+
+Factory.define :project do |p|
+  p.sequence(:name) {|n| "Faux Project#{n}" }
+  p.created_by   1
+  p.account_id   1
+end

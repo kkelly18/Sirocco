@@ -8,6 +8,13 @@ class User < ActiveRecord::Base
   has_many :accounts, :through => :sponsorships,
   :source => :account
 
+  has_many :memberships, :foreign_key => "user_id",
+                         :dependent => :destroy
+                                  
+  has_many :projects, :through => :memberships, 
+                               :source => :project
+                               
+
   email_regex = /\A[\w\-.]+@[a-z\d.]+\.[a-z]+\z/i
 
   validates :name,  

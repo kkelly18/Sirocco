@@ -52,7 +52,6 @@ describe Account do
 
     describe "Account#projects"
     it "should return projects associated to this account" do
-      pending
       project_attr = {:name        => "Alpha", 
                       :created_by  => @current_user.id, 
                       :account_id  => @account.id }
