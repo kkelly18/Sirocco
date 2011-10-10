@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
     if @account then
       @projects = @current_user.project_memberships(@account)
     else
-      @projects = @current_user.projects_memberships
+      @projects = @current_user.project_memberships
     end
     return @projects.paginate(:per_page => 6, :page => params[:page])
   end

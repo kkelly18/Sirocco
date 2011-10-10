@@ -135,37 +135,5 @@ describe "New user signup" do
 
     end
   end  
-end #New user
-
-describe "User signin" do
-  it "should allow an existing user to sign in" do
-    user = Factory(:user)
-    visit root_path               
-    click_link "Sign in"             
-
-    page.should have_selector('title', :content => "Sign in")
-  
-    fill_in   "Email",    :with => user.email
-    fill_in   "Password", :with => user.password
-  
-    click_button "Sign in"
-    page.should have_selector('nav li a', :href => signin_path, :content => "Sign out")
-    page.should have_selector('nav li',:content => user.name)
-    page.should have_selector('nav li img', :class => 'gravatar')
-    
-  end
-
-  it "should prevent an unknown user from signing in" do
-    visit root_path               
-    click_link "Sign in"             
-  
-    fill_in   "Email",    :with => "Unknown"
-    fill_in   "Password", :with => "foobar"
-
-    click_button "Sign in"
-    page.should have_selector("article div.flash.error", :text => "Invalid")        
-    page.should have_selector('title', :content => "Sign in")
-    page.should have_selector("nav li a", :href => signin_path, :content => "Sign in")
-  end
 
 end

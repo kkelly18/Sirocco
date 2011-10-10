@@ -1,2 +1,29 @@
-<h1>User#show</h1>
-<p>Find me in app/views/user/show.html.erb</p>
+<table>
+	<h1></h1>
+
+    <div class="span-24">
+	<nav class="product">
+	<ul>
+		<li><%= link_to 'Home', root_path %></li>
+	</ul>
+	</nav>
+	</div>
+	<br />
+
+	<div class="action span-24">
+	<nav class="action">
+		<ul>
+			<li><%= link_to 'SHOW ACCOUNTS', '#' %></li>
+		</ul>
+	</nav>
+	</div>
+	
+	<tr>
+		<td class="sidebar">
+		</td>
+		<td class="main">
+			<%= render 'projects/index' %>
+		</td>
+	</tr>
+	
+</table>

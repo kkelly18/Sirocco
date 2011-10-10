@@ -6,6 +6,9 @@ class UsersController < ApplicationController
   end
 
   def show
+    @title = "Home"
+    @current_user = current_user
+    @memberships  = @current_user.memberships.paginate(:per_page => 8, :page => params[:page])
   end
 
   def new
