@@ -29,50 +29,51 @@ def membership_commands (decorated_project_asssociation)
 end
 
 private
-def safe(p)
-  return nil if p == nil
-  #return nil if d.class != ...    
-  return p
-end
-  
-def invited_commands(d)
-  return [{:text        => 'Enroll', 
+
+  def safe(p)
+    return nil if p == nil
+    #return nil if d.class != ...    
+    return p
+  end
+
+  def invited_commands(d)
+    return [{:text        => 'Enroll', 
             :controller => 'memberships',
             :action     => 'update',
             :id         =>  d.id,
             :command    => 'enroll'}]
-end
-
-def enrolled_commands(d)
-  a = [{:text           =>'Withdraw', 
-            :controller => 'memberships',
-            :action     => 'update',
-            :id         => d.id,
-            :command    => 'withdraw'}]
-            
-  if account_admin?(d)
-    a << {:text           =>'Suspend', 
-              :controller => 'projects',
-              :action     => 'update',
-              :id         => d.project_id,
-              :command    => 'suspend'}
-  end        
-  return a
-end
-
-def suspended_commands(d)
-  if account_admin?(d)
-    return [{:text        => 'Reinstate', 
-              :controller => 'projects',
-              :action     => 'update',
-              :id         =>  d.project_id,
-              :command    => 'reinstate'}]
   end
-  return []
-end
 
-def account_admin?(d)
-  User.find(d.user_id).account_admin?(d.project.account_id)
-end
+  def enrolled_commands(d)
+    a = [{:text           =>'Withdraw', 
+      :controller => 'memberships',
+      :action     => 'update',
+      :id         => d.id,
+      :command    => 'withdraw'}]
+
+      if account_admin?(d)
+        a << {:text           =>'Suspend', 
+          :controller => 'projects',
+          :action     => 'update',
+          :id         => d.project_id,
+          :command    => 'suspend'}
+        end        
+        return a
+      end
+
+      def suspended_commands(d)
+        if account_admin?(d)
+          return [{:text        => 'Reinstate', 
+            :controller => 'projects',
+            :action     => 'update',
+            :id         =>  d.project_id,
+            :command    => 'reinstate'}]
+          end
+          return []
+        end
+
+        def account_admin?(d)
+          User.find(d.user_id).account_admin?(d.project.account_id)
+        end
 
 end

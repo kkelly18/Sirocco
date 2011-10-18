@@ -3,27 +3,25 @@
 
     <div class="span-24">
 	<nav class="product">
-	<ul>
-		<li><%= link_to 'Home', root_path %></li>
-	</ul>
 	</nav>
 	</div>
-	<br />
-
+	<br/>
 	<div class="action span-24">
 	<nav class="action">
 		<ul>
-			<li><%= link_to 'SHOW ACCOUNTS', '#' %></li>
+		  <li><%= link_to @items_text, user_path(:command=>@items_command) %></li>
 		</ul>
 	</nav>
 	</div>
 	
 	<tr>
+		<% if @command_form_partial %>
 		<td class="sidebar">
+			<%= render @command_form_partial %>
 		</td>
+		<% end %>
 		<td class="main">
-			<%= render 'projects/index' %>
+		  <%= render @items_partial %>
 		</td>
 	</tr>
-	
 </table>

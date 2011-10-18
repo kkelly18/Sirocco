@@ -1,0 +1,14 @@
+<tr>
+  <td class="index_item">
+    <span class="item_link" >
+      <%= link_to sponsorship.account.name, account_path(sponsorship.account.id) %>
+    </span>
+	<span class="item_commands" >
+	  <%= render :partial => 'accounts/sponsorship_command', :collection => sponsorship_commands(sponsorship) %>	  
+	</span>
+    <br/>
+	<span class="item_status">
+	  <%= sponsorship_status(sponsorship) %>
+	</span>
+  </td>
+</tr>

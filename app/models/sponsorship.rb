@@ -7,6 +7,8 @@ class Sponsorship < ActiveRecord::Base
   validates :user_id,      :presence => true
   validates :account_id,   :presence => true
   validates :created_by,   :presence => true
+  
+  scope :all, joins(:account).includes(:account)
 
   def enroll
     self.enroll_at ||= Time.now.utc
@@ -34,6 +36,10 @@ class Sponsorship < ActiveRecord::Base
   def withdraw
     self.delete_at ||= Time.now.utc
     self.save
+  end
+
+  def invited?
+    true unless self.enroll_at || self.suspend_at || self.delete_at
   end
 
 end

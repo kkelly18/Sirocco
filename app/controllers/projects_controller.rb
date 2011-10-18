@@ -3,13 +3,6 @@ class ProjectsController < ApplicationController
   #before_filter :account_admin,  :only => [:new, :create, :destroy]
   
   def index
-    @account = params[:account]
-    if @account then
-      @projects = @current_user.project_memberships(@account)
-    else
-      @projects = @current_user.project_memberships
-    end
-    return @projects.paginate(:per_page => 6, :page => params[:page])
   end
 
   def new

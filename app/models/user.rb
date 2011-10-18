@@ -3,16 +3,16 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :personal_account_name, :personal_account
 
   has_many :sponsorships, :foreign_key => "user_id",
-  :dependent => :destroy
+                      :dependent => :destroy
 
   has_many :accounts, :through => :sponsorships,
-  :source => :account
+                      :source => :account
 
   has_many :memberships, :foreign_key => "user_id",
                          :dependent => :destroy
                                   
   has_many :projects, :through => :memberships, 
-                               :source => :project
+                      :source => :project
                                
 
   email_regex = /\A[\w\-.]+@[a-z\d.]+\.[a-z]+\z/i
