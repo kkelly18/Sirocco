@@ -1,12 +1,27 @@
-<h1><%= @project.name %></h1>
-
-
-<% if @project.team_members.count > 0 %>
-  <%= will_paginate @team_members %>
-
-  <ul class="users">
-   	<%= render :partial => "team_member", :collection => @team_members %>
-  </ul>
-		
-  <%= will_paginate @team_members %>
-<% end %>
+<table>
+	<h1><%= @project.name %></h1>
+    <div class="span-24">
+	<nav class="product">
+	</nav>
+	</div>
+	<br/>
+	<div class="action span-24">
+	<nav class="action">
+		<ul>
+		  <li><%= link_to @items_text, project_path(:command=>@items_command) %></li>
+		</ul>
+	</nav>
+	</div>	
+	<tr>
+		<% if @command_form_partial %>
+  		  <td class="sidebar">
+			<%= render @command_form_partial %>
+		  </td>
+		<% end %>
+		<td class="main">
+			<% if @items_partial %>
+			  <%= render @items_partial %>
+			<% end %>
+		</td>
+	</tr>
+</table>

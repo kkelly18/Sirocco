@@ -1,7 +1,7 @@
 <tr>
   <td class="index_item">
     <span class="item_link" >
-      <%= membership.project.name %>
+      <%= link_to membership.project.name, project_path(membership.project_id) %>
     </span>
 	<span class="item_commands" >
 	  <%= render :partial => 'projects/membership_command', :collection => membership_commands(membership) %>	  

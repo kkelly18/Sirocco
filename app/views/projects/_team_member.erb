@@ -1,7 +1,7 @@
 <li>
   <%= gravatar_for team_member, :size => 30 %>
   <%= link_to team_member.name, team_member %>
-  <% if current_user.project_associations.where(:project_id=>@project.id).where(:admin=>true).exists? %>
+  <% if current_user.memberships.where(:project_id=>@project.id).where(:admin=>true).exists? %>
   |
   <%= link_to "suspend", '#', :method => :delete, :confirm => "You sure?", :title => "Suspend #{team_member.name}" %>
 

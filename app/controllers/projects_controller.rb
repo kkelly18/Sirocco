@@ -21,7 +21,26 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    @team_members = @project.team_members.paginate(:per_page => 6, :page => params[:page])
+    @command = params[:command]
+    case 
+      when @command == nil || @command =~ /FEED/i 
+        @items_text = 'SHOW TEAM'
+        @items_command = 'TEAM'
+        @command_form_partial = nil
+        @items_partial = nil
+      when @command =~ /TEAM/i
+        @team_members = @project.team_members.paginate(:per_page => 6, :page => params[:page])
+        @items_text = 'SHOW FEED'
+        @items_command = 'FEED'
+        @command_form_partial = nil #'projects/invite_user'
+        @invited_user = Membership.new
+        @items_partial = 'projects/team_members'
+      else
+        @items_text = 'SHOW TEAM'
+        @items_command = 'TEAM'
+        @command_form_partial = nil
+        @items_partial = 'projects/team_members'
+    end    
   end
   
   def edit
