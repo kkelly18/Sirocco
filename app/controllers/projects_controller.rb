@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
         @team_members = @project.team_members.paginate(:per_page => 6, :page => params[:page])
         @items_text = 'SHOW FEED'
         @items_command = 'FEED'
-        @command_form_partial = nil #'projects/invite_user'
+        @command_form_partial = 'projects/invite_user'
         @invited_user = Membership.new
         @items_partial = 'projects/team_members'
       else

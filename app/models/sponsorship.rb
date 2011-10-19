@@ -1,5 +1,6 @@
 class Sponsorship < ActiveRecord::Base
-  attr_accessible :user_id, :account_id, :created_by, :enroll_at, :suspend_at, :admin
+  attr_accessor :user_email #used for inviting users to projects
+  attr_accessible :user_id, :account_id, :created_by, :enroll_at, :suspend_at, :admin, :user_email
 
   belongs_to :user,        :class_name => "User"
   belongs_to :account,     :class_name => "Account"
@@ -36,6 +37,11 @@ class Sponsorship < ActiveRecord::Base
   def withdraw
     self.delete_at ||= Time.now.utc
     self.save
+  end
+
+  def invite
+    #TODO handle email not found
+    self.user_id = User.where(:email=>self.user_email).first.id 
   end
 
   def invited?

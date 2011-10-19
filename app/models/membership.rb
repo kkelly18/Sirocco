@@ -1,5 +1,6 @@
 class Membership < ActiveRecord::Base
-      attr_accessible :user_id, :project_id, :created_by, :enroll_at, :suspend_at, :admin
+      attr_accessor :user_email #used for inviting users to projects
+      attr_accessible :user_id, :project_id, :created_by, :enroll_at, :suspend_at, :admin, :user_email
 
       belongs_to :user,        :class_name => "User"
       belongs_to :project,     :class_name => "Project"
@@ -10,7 +11,7 @@ class Membership < ActiveRecord::Base
 
       scope :in_the_set_of, lambda {|project| where(:project_id => project).joins(:project).includes(:project)}
       scope :all, joins(:project).includes(:project)
-
+      
       def enroll
         self.enroll_at ||= Time.now.utc
         self.save
@@ -42,5 +43,10 @@ class Membership < ActiveRecord::Base
       def invited?
         true unless self.enroll_at || self.suspend_at || self.delete_at
       end
-
-  end
+      
+      def invite
+        #TODO handle email not found
+        self.user_id = User.where(:email=>self.user_email).first.id 
+      end
+      
+end

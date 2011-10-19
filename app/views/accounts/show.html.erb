@@ -1,6 +1,5 @@
 <table>
-	<h1><a><%=@account.name%></a></h1>
-
+	<h1><%= @account.name %></h1>
     <div class="span-24">
 	<nav class="product">
 	<ul>
@@ -8,23 +7,24 @@
 	</ul>
 	</nav>
 	</div>
-	<br />
-
+	<br/>
 	<div class="action span-24">
 	<nav class="action">
 		<ul>
-			<li></li>
+		  <li><%= link_to @items_text, account_path(:command=>@items_command) %></li>
 		</ul>
 	</nav>
-	</div>
-	
+	</div>	
 	<tr>
-		<td class="sidebar">
-			<%= render 'projects/new_project' %>
-		</td>
+		<% if @command_form_partial %>
+  		  <td class="sidebar">
+			<%= render @command_form_partial %>
+		  </td>
+		<% end %>
 		<td class="main">
-			<%= render 'projects/index' %>
+			<% if @items_partial %>
+			  <%= render @items_partial %>
+			<% end %>
 		</td>
 	</tr>
-	
 </table>

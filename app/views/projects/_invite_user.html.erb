@@ -1,8 +1,10 @@
+
 <%= form_for(@invited_user) do |f| %>
 <div class="field">
-  <%= f.label :name, "Invite a user" %><br />
-  <%= f.text_field :name %> <br />
+  <%= f.label :user_email, "Invite a user" %><br />
+  <%= f.text_field :user_email %> <br/>
 </div>
+<%= f.hidden_field :project_id, :value => @project.id %>
 <%= f.hidden_field :created_by, :value => @current_user.id%>
 <div class="actions">
 	<%= f.submit "Invite" %>

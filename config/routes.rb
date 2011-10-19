@@ -23,7 +23,7 @@ Sirocco::Application.routes.draw do
     end
   end  
   
-  resources :memberships, :only => [:update]
+  resources :memberships
 
   # Sample resource route with options:
   #   resources :products do

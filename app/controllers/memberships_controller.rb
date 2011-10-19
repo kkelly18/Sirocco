@@ -1,6 +1,15 @@
 class MembershipsController < ApplicationController
   before_filter :authenticate
 
+  def create
+    @membership = Membership.new(params[:membership])
+    @membership.user_id = User.where(:email=>@membership.user_email).first.id 
+    if @membership.save!
+      redirect_to :back
+    end
+    
+  end
+
   def update
     #todo implement command pattern
     membership = Membership.find(params[:id])

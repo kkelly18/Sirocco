@@ -1,0 +1,4 @@
+<% if @account.team_members.count > 0 %>
+  <%= render :partial => "team_member", :collection => @team_members %>
+  <%= will_paginate @team_members %>		
+<% end %>
