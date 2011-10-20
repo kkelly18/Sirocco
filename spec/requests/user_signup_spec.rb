@@ -20,7 +20,6 @@ describe "New user signup" do
         click_button "Sign up"                
         page.should have_selector("div.flash.success", :text => "Welcome")        
         page.should have_selector('nav li', :text => "Sign out")
-save_and_open_page
         fill_in "project_name", :with => "First!"
         click_button "Create"
         page.should have_selector("div.flash.success", :text => "First")        

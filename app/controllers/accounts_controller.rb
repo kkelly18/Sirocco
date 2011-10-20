@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
-
+  before_filter :authenticate
+  
   def show
     @current_user = current_user
     @account      = Account.find(params[:id])

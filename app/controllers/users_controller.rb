@@ -1,9 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate,    :except => [:show, :new, :create]  
-  
-  def index
-    @users = User.paginate(:per_page => 6, :page => params[:page])
-  end
+  before_filter :authenticate,    :except => [:new, :create]  
 
   def show
     @title = "Home"

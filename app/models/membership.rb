@@ -5,13 +5,15 @@ class Membership < ActiveRecord::Base
       belongs_to :user,        :class_name => "User"
       belongs_to :project,     :class_name => "Project"
 
+      before_validation_on_create :invite
+
       validates :user_id,      :presence => true
       validates :project_id,   :presence => true
       validates :created_by,   :presence => true
 
       scope :in_the_set_of, lambda {|project| where(:project_id => project).joins(:project).includes(:project)}
       scope :all, joins(:project).includes(:project)
-      
+            
       def enroll
         self.enroll_at ||= Time.now.utc
         self.save
@@ -44,9 +46,8 @@ class Membership < ActiveRecord::Base
         true unless self.enroll_at || self.suspend_at || self.delete_at
       end
       
-      def invite
-        #TODO handle email not found
-        self.user_id = User.where(:email=>self.user_email).first.id 
-      end
-      
+      private
+        def invite
+          self.user_id = User.where(:email => "#{self.user_email}").first.id if self.user_email
+        end              
 end

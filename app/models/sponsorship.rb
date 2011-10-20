@@ -4,6 +4,8 @@ class Sponsorship < ActiveRecord::Base
 
   belongs_to :user,        :class_name => "User"
   belongs_to :account,     :class_name => "Account"
+  
+  before_validation_on_create :invite
 
   validates :user_id,      :presence => true
   validates :account_id,   :presence => true
@@ -39,13 +41,13 @@ class Sponsorship < ActiveRecord::Base
     self.save
   end
 
-  def invite
-    #TODO handle email not found
-    self.user_id = User.where(:email=>self.user_email).first.id 
-  end
-
   def invited?
     true unless self.enroll_at || self.suspend_at || self.delete_at
   end
+  
+  private
+    def invite
+      self.user_id = User.where(:email => "#{self.user_email}").first.id if self.user_email
+    end              
 
 end
