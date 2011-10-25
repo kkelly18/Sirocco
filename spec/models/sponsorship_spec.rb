@@ -37,6 +37,73 @@ describe Sponsorship do
       end
     end  # validations
 
+    describe "state machine" do
+      before (:each) do
+        @sponsorship = @user.sponsorships.create!(@attr)
+      end
+      it "should be set to invited by default" do
+        @sponsorship.should be_invited
+      end    
+
+      it "should be enrolled" do
+        @sponsorship.enroll
+        @sponsorship.should be_enrolled
+      end
+
+      it "should be suspendable" do
+        @sponsorship.enroll
+        @sponsorship.suspend
+        @sponsorship.should be_suspended
+      end    
+
+      it "should be reinstated once suspended" do
+        @sponsorship.enroll
+        @sponsorship.suspend
+        @sponsorship.reinstate
+        @sponsorship.should be_enrolled
+      end
+
+      it "should be removed" do
+        @sponsorship.enroll
+        @sponsorship.suspend
+        @sponsorship.remove
+        @sponsorship.should be_removed
+      end
+    end
+    
+    describe "access state machine" do
+      before (:each) do
+        @sponsorship = @user.sponsorships.create!(@attr)
+      end
+
+      it "should be set to contributor by default" do
+        @sponsorship.should be_access_contributor
+      end    
+
+      it "should be set from contributor to admin" do
+        @sponsorship.promote_access
+        @sponsorship.should be_access_admin
+      end
+      
+      it "should be set from admin to contributor" do
+        @sponsorship.promote_access
+        @sponsorship.should be_access_admin
+        @sponsorship.demote_access
+        @sponsorship.should be_access_contributor
+      end        
+
+      it "should be admin when promoting past the end" do
+        @sponsorship.promote_access
+        @sponsorship.promote_access
+        @sponsorship.should be_access_admin          
+      end        
+
+      it "should be contributor when demoting past the start" do
+        @sponsorship.demote_access
+        @sponsorship.should be_access_contributor          
+      end        
+    end
+    
     describe "methods" do
 
       before (:each) do
@@ -61,89 +128,6 @@ describe Sponsorship do
         it "should have the right account" do
           @sponsorship.account.should == @account
         end
-      end
-
-      describe "Sponsorship#enroll" do
-        it "should have attribute: Sponsorship#enroll" do
-          @sponsorship.should respond_to(:enroll)
-        end
-
-        it "should set the enroll_at datetime" do
-          @sponsorship.enroll_at.should be_nil
-          @sponsorship.enroll
-          @sponsorship = @user.sponsorships.find_by_account_id(@account)
-          @sponsorship.enroll_at.should_not be_nil
-          @sponsorship.enroll_at.should be <= Time.now.utc
-        end
-      end
-
-      describe "Sponsorship#enrolled?" do
-        it "should have attribute: Sponsorship#enrolled?" do
-          @sponsorship.should respond_to(:enrolled?)
-        end
-
-        it "should return correct boolean" do
-          @sponsorship.should_not be_enrolled
-          @sponsorship.enroll
-          @sponsorship = @user.sponsorships.find_by_account_id(@account)
-          @sponsorship.should be_enrolled
-        end
-      end
-
-      describe "Sponsorship#suspend" do
-        it "should have member attribute: Sponsorship#suspend" do
-          @sponsorship.should respond_to(:suspend)
-        end    
-
-        it "should set the suspend_at datetime" do
-          @sponsorship.suspend_at.should be_nil
-          @sponsorship.suspend
-          @sponsorship = @user.sponsorships.find_by_account_id(@account)
-          @sponsorship.suspend_at.should_not be_nil
-          @sponsorship.suspend_at.should be <= Time.now.utc
-        end      
-      end
-
-      describe "Sponsorship#supended?" do
-        it "should have member attribute: Sponsorship#suspended?" do
-          @sponsorship.should respond_to(:suspended?)
-        end    
-
-        it "should return correct boolean" do
-          @sponsorship.should_not be_suspended
-          @sponsorship.suspend
-          @sponsorship = @user.sponsorships.find_by_account_id(@account)
-          @sponsorship.should be_suspended
-        end
-      end
-
-      describe "Sponsorship#reinstate" do
-        it "should have member attribute: Sponsorship#reinstate" do
-          @sponsorship.should respond_to(:reinstate)
-        end    
-
-        it "should set the suspend_at datetime to nil" do
-          @attr[:suspend_at] = Time.now.utc
-          @sponsorship = @user.sponsorships.create!(@attr)
-          @sponsorship.suspend_at.should_not be_nil
-          @sponsorship.reinstate
-          @sponsorship = @user.sponsorships.find_by_account_id(@account)
-          @sponsorship.suspend_at.should be_nil
-        end
-      end
-
-      describe "Sponsorship#withdraw" do
-        it "should have member attribute: Sponsorship#withdraw" do
-          @sponsorship.should respond_to(:withdraw)
-        end    
-
-        it "should set the delete_at datetime" do
-          @sponsorship.delete_at.should be_nil
-          @sponsorship.withdraw
-          @sponsorship = @user.sponsorships.find_by_account_id(@account)
-          @sponsorship.delete_at.should_not be_nil
-          @sponsorship.delete_at.should be <= Time.now.utc
-        end      
       end
 
     end #methods
