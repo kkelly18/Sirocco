@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Account do
 
   before(:each) do
-    @current_user = @user = Factory(:user)
+    @current_user = @account = Factory(:user)
     @attr = {:name        => "Good Account", 
              :created_by  => @current_user.id}
   end
@@ -24,6 +24,37 @@ describe Account do
       Account.new(@attr).should_not be_valid
     end
   end #validators
+  
+  describe "state_machine" do
+
+    before(:each) do
+      @account = Account.create!(@attr)
+    end
+        
+    it "should be set to active by default" do
+      @account.should be_active
+    end    
+
+    it "should be suspendable" do
+      @account.suspend
+      @account.should be_suspended
+    end    
+    
+    it "should be reinstated once suspended" do
+      @account.suspend
+      @account.should be_suspended
+      @account.reinstate
+      @account.should be_active
+    end
+
+    it "should be removed" do
+      @account.suspend
+      @account.remove
+      @account.should be_removed
+    end
+
+  end
+  
 
   describe "methods" do
 
@@ -40,15 +71,6 @@ describe Account do
     it "should include: Account#project" do
       @account.should respond_to(:projects)
     end    
-    it "should include: Account#suspend" do
-      @account.should respond_to(:suspend)
-    end    
-    it "should include: Account#suspended?" do
-      @account.should respond_to(:suspended?)
-    end    
-    it "should include: Account#reinstate" do
-      @account.should respond_to(:reinstate)
-    end    
 
     describe "Account#projects"
     it "should return projects associated to this account" do
@@ -59,35 +81,8 @@ describe Account do
 
       project_attr[:name]= "Beta"
       Project.create!(project_attr)
-
       @account.projects.should have(2).items
     end
-    
-    describe "Account#suspend" do
-      it "should set the suspend_at datetime" do
-        @account.suspend_at.should be_nil
-        @account.suspend
-        @account.suspend_at.should_not be_nil
-        @account.suspend_at.should be <= Time.now.utc
-      end
-    end
-    
-    describe "Account#suspend?" do
-      it "should return correct boolean" do
-        @account.should_not be_suspended
-        @account.suspend
-        @account.should be_suspended
-      end
-    end
-    
-    describe "Account#reinstate" do
-      it "should set the suspend_at datetime to nil" do
-        @attr[:suspend_at] = Time.now.utc
-        @account = Account.create!(@attr)
-        @account.suspend_at.should_not be_nil
-        @account.reinstate
-        @account.suspend_at.should be_nil
-      end
-    end
+        
   end #methods
 end
