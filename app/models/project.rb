@@ -20,21 +20,25 @@ class Project < ActiveRecord::Base
             
   validates :created_by,
             :presence => true
-            
-  def suspend
-    self.suspend_at = Time.now.utc
-    self.save
-  end
-  
-  def suspended?
-    true unless self.suspend_at == nil || self.suspend_at > Time.now.utc
-  end
-  
-  def reinstate
-    self.suspend_at = nil
-    self.save
-  end
 
+  state_machine :state, :initial => :active do
+    event :suspend do
+      transition :active => :suspended
+    end
+    event :reinstate do
+      transition :suspended => :active
+    end
+    event :remove do
+      transition :suspended => :removed
+    end
+    state :active do
+    end
+    state :suspended do
+    end
+    state :removed do
+    end    
+  end
+            
   private
     def update_membership
       self.memberships.build( :project_id => 1,

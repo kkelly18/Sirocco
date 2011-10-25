@@ -4,10 +4,10 @@ describe Project do
 
   before(:each) do
     @current_user = @user = Factory(:user)
-    @account = Factory(:account)
+    @project = Factory(:account)
     @attr = {:name        => "Good Project", 
              :created_by  => @current_user.id, 
-             :account_id  => @account.id}
+             :account_id  => @project.id}
   end
 
   it "should create a new Project given valid parameters" do
@@ -33,6 +33,36 @@ describe Project do
     Project.new(@attr).should_not be_valid
   end
 
+  describe "state_machine" do
+
+    before(:each) do
+      @project = Project.create!(@attr)
+    end
+        
+    it "should be set to active by default" do
+      @project.should be_active
+    end    
+
+    it "should be suspendable" do
+      @project.suspend
+      @project.should be_suspended
+    end    
+    
+    it "should be reinstated once suspended" do
+      @project.suspend
+      @project.should be_suspended
+      @project.reinstate
+      @project.should be_active
+    end
+
+    it "should be removed" do
+      @project.suspend
+      @project.remove
+      @project.should be_removed
+    end
+
+  end
+  
   describe "methods" do
    
     before (:each) do
@@ -45,44 +75,7 @@ describe Project do
     it "should include Project#team_members" do
       @project.should respond_to(:team_members)
     end
-    it "should include Project#suspend" do
-      @project.should respond_to(:suspend)
-    end
-    it "should include Project#suspended?" do
-      @project.should respond_to(:suspended?)
-    end
-    it "should include Project#reinstate" do
-      @project.should respond_to(:reinstate)
-    end                
     
-    describe "Project#suspend" do
-      it "should set suspend_at datetime" do
-        @project = Project.create!(@attr)
-        @project.suspend_at.should be_nil
-        @project.suspend
-        @project.suspend_at.should_not be_nil
-        @project.suspend_at.should be <= Time.now.utc
-      end
-    end
-    
-    describe "Project#suspend?" do
-      it "should return correct boolean" do
-        @project = Project.create!(@attr)
-        @project.should_not be_suspended
-        @project.suspend
-        @project.should be_suspended
-      end
-    end    
-    
-    describe "Project#reinstate" do
-      it "should set suspend_at datetime to nil" do
-        @attr[:suspend_at] = Time.now.utc
-        @project = Project.create!(@attr)
-        @project.suspend_at.should_not be_nil
-        @project.reinstate
-        @project.suspend_at.should be_nil
-      end
-    end        
   end #method
 
 end
