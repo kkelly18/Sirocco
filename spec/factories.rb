@@ -25,7 +25,7 @@ Factory.define :membership do | m |
   m.created_by  1
 end
 
-Factory.define :project_with_membership, :parent => :project do |project|
-  project.after_create { |p| Factory(:membership, :user_id => p.created_by, :project_id => p.id, :created_by => p.created_by) }
-end
+# Factory.define :project_with_membership, :parent => :project do |project|
+#   project.after_create { |p| Factory(:membership, :user_id => p.created_by, :project_id => p.id, :created_by => p.created_by) }
+# end
 

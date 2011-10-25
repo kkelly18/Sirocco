@@ -33,6 +33,32 @@ class User < ActiveRecord::Base
 
   before_save  :encrypt_password
   after_create :create_personal_account
+  
+  state_machine :state, :initial => :active do
+    event :promote do
+      transition :active => :sys_admin
+    end
+    event :demote do
+      transition :sys_admin => :active
+    end
+    event :suspend do
+      transition :active => :suspended, :sys_admin => :suspended
+    end
+    event :reinstate do
+      transition :suspended => :active
+    end
+    event :remove do
+      transition :suspended => :removed
+    end
+    state :active do
+    end
+    state :sys_admin do
+    end
+    state :suspended do
+    end
+    state :removed do
+    end    
+  end
 
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)

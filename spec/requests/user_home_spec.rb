@@ -1,7 +1,7 @@
 require 'spec_helper'
 #TOOL: save_and_open_page
 
-describe "User Home" do
+describe "User#Home" do
   it "should navigate a signedin user to Home " do
     user = Factory(:user)
     account = Factory(:account) #use as the personal account
@@ -45,7 +45,7 @@ describe "User Home" do
     page.should have_selector('title', :text => "Home")    
   end
 
-  it "should show list of accounts when 'SHOW ACCOUNTS' clicked " do
+  it "should show a list of accounts when 'SHOW ACCOUNTS' clicked " do
     user = Factory(:user)
     3.times do
       account = Factory(:account) #use as the personal account

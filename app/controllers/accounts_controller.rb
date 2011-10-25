@@ -2,6 +2,7 @@ class AccountsController < ApplicationController
   before_filter :authenticate
   
   def show
+    @title        = "Account"
     @current_user = current_user
     @account      = Account.find(params[:id])
     @new_project  = @account.projects.build

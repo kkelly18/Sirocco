@@ -63,24 +63,50 @@ describe User do
     end
   end
   
-  describe "admin attribute" do
+  describe "state_machine" do
 
     before(:each) do
       @user = User.create!(@attr)
     end
-
-    it "should respond to admin" do
-      @user.should respond_to(:admin)
-    end
+        
+    it "should be set to active by default" do
+      @user.should be_active
+    end    
 
     it "should not be an admin by default" do
-      @user.should_not be_admin
+      @user.should_not be_sys_admin
+    end
+    
+    it "should be promotable to an admin" do
+      @user.promote
+      @user.should be_sys_admin
+    end
+    
+    it "should be demotable to active once an admin" do
+      @user.promote
+      @user.should be_sys_admin
+      @user.demote
+      @user.should be_active
+    end
+    
+    it "should be suspendable" do
+      @user.suspend
+      @user.should be_suspended
+    end    
+    
+    it "should be reinstated once suspended" do
+      @user.suspend
+      @user.should be_suspended
+      @user.reinstate
+      @user.should be_active
     end
 
-    it "should be convertible to an admin" do
-      @user.toggle!(:admin)
-      @user.should be_admin
+    it "should be removed" do
+      @user.suspend
+      @user.remove
+      @user.should be_removed
     end
+
   end
 
   describe "passwords" do
