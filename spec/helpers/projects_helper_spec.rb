@@ -26,7 +26,8 @@ describe ProjectsHelper do
           end
           describe "and where they are ENROLLED," do
             it "'status' should return 'Enrolled'." do
-              assoc = associate(@user.id, @active_project.id, Time.now.utc)
+              assoc = associate(@user.id, @active_project.id)
+              assoc.enroll
               membership_status(assoc).should =~ /Enrolled/
             end
           end
@@ -43,7 +44,8 @@ describe ProjectsHelper do
           end
           describe "and where they are ENROLLED," do
             it "'status' should return 'Enrolled'." do
-              assoc = associate(@admin.id, @active_project.id, Time.now.utc)
+              assoc = associate(@admin.id, @active_project.id)
+              assoc.enroll
               membership_status(assoc).should =~ /Enrolled/
             end
           end
@@ -63,7 +65,8 @@ describe ProjectsHelper do
           end
           describe "and where they are ENROLLED," do
             it "'status' should return 'Suspended'." do
-              assoc = associate(@user.id, @suspended_project.id, Time.now.utc)
+              assoc = associate(@user.id, @suspended_project.id)
+              assoc.suspend
               membership_status(assoc).should =~ /Suspended/
             end
           end
@@ -80,7 +83,8 @@ describe ProjectsHelper do
           end
           describe "and where they are ENROLLED," do
             it "'status' should return 'Suspended'." do
-              assoc = associate(@admin.id, @suspended_project.id, Time.now.utc)
+              assoc = associate(@admin.id, @suspended_project.id)
+              assoc.suspend
               membership_status(assoc).should =~ /Suspended/
             end
           end
@@ -118,8 +122,8 @@ describe ProjectsHelper do
           end
           describe "and where they are ENROLLED," do
             it "'commands' should return 'Withdraw'." do
-              assoc = associate(@user.id, @active_project.id, Time.now.utc)
-
+              assoc = associate(@user.id, @active_project.id)
+              assoc.enroll
               c = membership_commands(assoc)
               c.should have(1).item
               c.first[:command].should =~ /withdraw/
@@ -141,7 +145,8 @@ describe ProjectsHelper do
           end
           describe "and where they are ENROLLED," do
             it "'commands' should return 'Withdraw' and 'Suspend'." do
-              assoc = associate(@admin.id, @active_project.id, Time.now.utc)
+              assoc = associate(@admin.id, @active_project.id)
+              assoc.enroll
 
               c = membership_commands(assoc)
               c.should have(2).items
@@ -168,8 +173,9 @@ describe ProjectsHelper do
           
           describe "and where they are ENROLLED," do
             it "'commands' should return empty list." do
-              assoc = associate(@user.id, @suspended_project.id, Time.now.utc)
-
+              assoc = associate(@user.id, @suspended_project.id)
+              assoc.enroll
+              
               c = membership_commands(assoc)
               c.should have(0).items
             end
@@ -191,7 +197,8 @@ describe ProjectsHelper do
           end
           describe "and where they are ENROLLED," do
             it "'commands' should return 'Reinstate'." do
-              assoc = associate(@admin.id, @suspended_project.id, Time.now.utc)
+              assoc = associate(@admin.id, @suspended_project.id)
+              assoc.enroll
 
               c = membership_commands(assoc)
               c.should have(1).item
@@ -227,11 +234,11 @@ describe ProjectsHelper do
     @suspended_project = suspended_project(@account.id)
   end
 
-  def associate(user_id, project_id, enroll_at=nil)
-    Factory(:membership, 
+  def associate(user_id, project_id)
+    membership = Factory(:membership, 
               :user_id    => user_id, 
-              :project_id => project_id,
-              :enroll_at  => enroll_at)
+              :project_id => project_id)
+    return membership
   end
   
   def active_project(account_id)
@@ -239,18 +246,22 @@ describe ProjectsHelper do
   end
   
   def suspended_project(account_id)
-    Factory(:project, 
-    :account_id => account_id, 
-    :suspend_at => Time.now.utc)
+    project = Factory(:project, 
+            :account_id => account_id)
+    project.suspend
+    project.save
+    return project        
   end
   
   def account_user(account_id, admin=false)
     user = Factory(:user)     
 
-    Factory(:sponsorship,
+    account = Factory(:sponsorship,
     :user_id    => user.id,
-    :account_id => account_id,
-    :admin => admin)
+    :account_id => account_id)
+    
+    account.promote_access if admin
+    account.save
     
     return user
   end  

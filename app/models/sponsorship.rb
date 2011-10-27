@@ -5,13 +5,16 @@ class Sponsorship < ActiveRecord::Base
   belongs_to :user,        :class_name => "User"
   belongs_to :account,     :class_name => "Account"
   
-  before_validation_on_create :invite
-
+  before_validation :on => :create do |user|
+    invite
+  end
+    
   validates :user_id,      :presence => true
   validates :account_id,   :presence => true
   validates :created_by,   :presence => true
   
   scope :all, joins(:account).includes(:account)
+  
   state_machine :state, :initial => :invited do
     event :enroll do
       transition :invited => :enrolled

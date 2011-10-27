@@ -38,10 +38,10 @@ class Account < ActiveRecord::Base
             
   private
     def update_sponsorship
-      self.sponsorships.build(:account_id => 1,
+      s = self.sponsorships.build(:account_id => 1,
                               :user_id    => self.created_by, 
-                              :created_by => self.created_by,
-                              :enroll_at  => Time.now.utc, 
-                              :admin      => true)      
+                              :created_by => self.created_by)
+      s.enroll #creating own account, so enroll thy self
+      s.promote_access #creating own account, so make self admin
     end
 end

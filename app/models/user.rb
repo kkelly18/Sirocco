@@ -14,7 +14,10 @@ class User < ActiveRecord::Base
   has_many :projects, :through => :memberships, 
                       :source => :project
                                
-
+  before_validation :on => :create  do |user| 
+    user.send(:initialize_state_machines, :dynamic => :force)
+  end
+  
   email_regex = /\A[\w\-.]+@[a-z\d.]+\.[a-z]+\z/i
 
   validates :name,  
@@ -76,7 +79,7 @@ class User < ActiveRecord::Base
   end
 
   def account_admin?(account)
-    sponsorships.find_by_account_id(account).admin
+    sponsorships.find_by_account_id(account).access_admin?
   end
 
   def account_projects(account)

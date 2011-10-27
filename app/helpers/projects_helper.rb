@@ -2,7 +2,7 @@ module ProjectsHelper
 
 def membership_status (decorated_project_asssociation)
   return nil if !(d = safe(decorated_project_asssociation))
-
+ 
   if d.project.suspended? then
     return "Suspended" 
   else

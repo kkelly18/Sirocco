@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111025194211) do
+ActiveRecord::Schema.define(:version => 20111025224347) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -48,12 +48,10 @@ ActiveRecord::Schema.define(:version => 20111025194211) do
     t.integer  "user_id"
     t.integer  "account_id"
     t.integer  "created_by"
-    t.boolean  "admin",      :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "enroll_at"
-    t.datetime "suspend_at"
-    t.datetime "delete_at"
+    t.string   "state"
+    t.string   "access_state"
   end
 
   add_index "sponsorships", ["account_id"], :name => "index_sponsorships_on_account_id"

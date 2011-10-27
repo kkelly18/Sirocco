@@ -35,7 +35,7 @@ module AccountsHelper
   end
 
   def invited_sponsorship_commands(d)
-      return [{:text        => 'Enroll', 
+      return [{:text      => 'Enroll', 
               :controller => 'sponsorships',
               :action     => 'update',
               :id         =>  d.id,
@@ -49,7 +49,8 @@ module AccountsHelper
               :id         => d.id,
               :command    => 'withdraw'}]
 
-      if User.find(d.user_id).account_admin?(d.account_id)
+      # if User.find(d.user_id).account_admin?(d.account_id)
+        if User.find(d.user_id).sponsorships.find_by_account_id(d.account_id).access_admin?
         a << {:text           =>'Suspend', 
                 :controller => 'accounts',
                 :action     => 'update',
