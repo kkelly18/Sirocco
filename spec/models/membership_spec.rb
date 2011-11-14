@@ -144,6 +144,6 @@ describe Membership do
             @membership.project.should == @project
           end
         end
-
       end #methods
+      
     end    

@@ -94,9 +94,11 @@ class User < ActiveRecord::Base
   def query_memberships(account=nil)
     if account
       project_array = calc_account_projects(account)
-      return memberships.in_the_set_of(project_array)
+      ships = memberships.in_the_set_of(project_array)
+      return ships
     else
-      return memberships.all
+      ships = memberships.all
+      return ships
     end
   end
 

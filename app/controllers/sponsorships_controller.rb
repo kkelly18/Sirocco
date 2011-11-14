@@ -15,9 +15,9 @@ class SponsorshipsController < ApplicationController
     case 
       when command =~ /enroll/       then sponsorship.enroll
       when command =~ /withdraw/     then sponsorship.withdraw
+      when command =~ /rejoin/       then sponsorship.rejoin  
       when command =~ /suspend/      then sponsorship.suspend
       when command =~ /reinstate/    then sponsorship.reinstate
-      when command =~ /toggle_admin/ then sponsorship.toggle!(:admin)
     end
     redirect_to :back 
   end

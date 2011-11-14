@@ -54,8 +54,10 @@ describe "User#Account" do
     page.find_by_id 'project_name'
     fill_in "project_name", :with => 'test_project'
     click_button "Create"
+    save_and_open_page
     page.find('td.index_item', :text => 'test_project').find('a', :text => 'Withdraw')
     page.find('td.index_item', :text => 'test_project').click_link('Withdraw')
+    save_and_open_page
   end
   it "should allow an admin to suspend a project" do
     pending
