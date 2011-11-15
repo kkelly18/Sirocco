@@ -45,6 +45,17 @@ describe Sponsorship do
         @sponsorship.should be_invited
       end    
 
+      it "should be uninvited" do
+        @sponsorship.uninvite
+        @sponsorship.should be_uninvited
+      end
+      
+      it "should be invited" do
+        @sponsorship.uninvite
+        @sponsorship.invite
+        @sponsorship.should be_invited
+      end      
+
       it "should be enrolled" do
         @sponsorship.enroll
         @sponsorship.should be_enrolled

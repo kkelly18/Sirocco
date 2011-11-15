@@ -8,7 +8,7 @@ class Membership < ActiveRecord::Base
   belongs_to :project,     :class_name => "Project"
 
   before_validation :on => :create do |user|
-    invite
+    lookup_id_from_email
   end
 
   validates :user_id,      :presence => true
@@ -47,19 +47,12 @@ class Membership < ActiveRecord::Base
     
     state :invited do
       def status
-        return "Invited" unless self.project.suspended?
-        return "Project Suspended" 
+        status_string_for_current_state
       end
       def commands
         a = []
         if self.project.suspended? 
-          if current_user_is_account_admin?
-            a << {:text       => 'Reinstate', 
-                  :controller => 'projects',
-                  :action     => 'update',
-                  :id         => self.project_id,
-                  :command    => 'reinstate'}
-          end
+          return reinstate_project_command if current_user_is_account_admin?
           return a
         end         
         if current_user_is_member?
@@ -70,38 +63,25 @@ class Membership < ActiveRecord::Base
                 :command    => 'enroll'}
         else #if current_user is not this member and...
           if current_user_is_project_admin?
-          a << {:text => 'Uninvite', 
-                :controller => 'memberships',
-                :action     => 'update',
-                :id         =>  self.id,
-                :command    => 'uninvite'}
+            a << {:text       => 'Uninvite', 
+                  :controller => 'memberships',
+                  :action     => 'update',
+                  :id         =>  self.id,
+                  :command    => 'uninvite'}
           end
         end
-        if current_user_is_account_admin?
-          a << {:text       => 'Suspend', 
-                :controller => 'projects',
-                :action     => 'update',
-                :id         => self.project_id,
-                :command    => 'suspend'}
-        end
+        a << suspend_project_command if current_user_is_account_admin?
         return a                          
-      end
-    end
+      end #end def
+    end #end state
     state :uninvited do
       def status
-        return "Uninvited" unless self.project.suspended?
-        return "Project Suspended"         
+        status_string_for_current_state
       end
       def commands
         a = []
         if self.project.suspended? 
-          if current_user_is_account_admin?
-            a << {:text       => 'Reinstate', 
-                  :controller => 'projects',
-                  :action     => 'update',
-                  :id         => self.project_id,
-                  :command    => 'reinstate'}
-          end
+          return reinstate_project_command if current_user_is_account_admin?
           return a
         end         
         if current_user_is_project_admin? # members can'e uninvite themselves
@@ -111,39 +91,20 @@ class Membership < ActiveRecord::Base
                 :id         =>  self.id,
                 :command    => 'invite'}
         end
-        if current_user_is_account_admin?
-          a << {:text       => 'Suspend', 
-                :controller => 'projects',
-                :action     => 'update',
-                :id         => self.project_id,
-                :command    => 'suspend'}
-        end
-      return a
-    end
-    end
+        a << suspend_project_command if current_user_is_account_admin?
+        return a
+      end #end def
+    end #end state
     state :enrolled do
       def status
-        return "Enrolled" unless self.project.suspended?
-        return "Project Suspended" 
+        status_string_for_current_state
       end
       def commands
-        #depends on:
-          #state of the project
-          #access state of the account user
-          #access state of the project user
-          #whether current user is the member
         a = []
         if self.project.suspended? 
-          if current_user_is_account_admin?
-            a << {:text       => 'Reinstate', 
-                  :controller => 'projects',
-                  :action     => 'update',
-                  :id         => self.project_id,
-                  :command    => 'reinstate'}
-          end
+          return reinstate_project_command if current_user_is_account_admin?
           return a
-        end  
-        
+        end         
         if current_user_is_member?
           a << {:text       => 'Withdraw', 
                 :controller => 'memberships',
@@ -152,96 +113,56 @@ class Membership < ActiveRecord::Base
                 :command    => 'withdraw'}
         else #if current_user is not this member and...
           if current_user_is_project_admin?
-          a << {:text => 'Suspend Member', 
-                :controller => 'memberships',
-                :action     => 'update',
-                :id         =>  self.id,
-                :command    => 'suspend'}
-          end
-        end
-          
-        if current_user_is_account_admin?
-          a << {:text       => 'Suspend', 
-                :controller => 'projects',
-                :action     => 'update',
-                :id         => self.project_id,
-                :command    => 'suspend'}
-        end          
-        return a
-      end
-    end
-    state :withdrawn do
-      def status
-        return "Withdrawn" unless self.project.suspended?
-        return "Project Suspended" 
-      end
-      def commands
-          #depends on:
-            #state of the project
-            #access state of the account user
-            #access state of the project user
-            #whether current user is the member
-          a = []
-          if self.project.suspended? 
-            if current_user_is_account_admin?
-              a << {:text       => 'Reinstate', 
-                    :controller => 'projects',
-                    :action     => 'update',
-                    :id         => self.project_id,
-                    :command    => 'reinstate'}
-            end
-            return a
-          end  
-
-          if current_user_is_member?
-            a << {:text       => 'Rejoin', 
+            a << {:text       => 'Suspend Member', 
                   :controller => 'memberships',
                   :action     => 'update',
                   :id         =>  self.id,
-                  :command    => 'rejoin'}
-          else #current user is not member
-            if current_user_is_project_admin?
-              a << {:text       => 'Suspend membership', 
-                    :controller => 'memberships',
-                    :action     => 'update',
-                    :id         =>  self.id,
-                    :command    => 'suspend'}
-            end
-          end
-
-          if current_user_is_account_admin?
-            a << {:text       => 'Suspend project', 
-                  :controller => 'projects',
-                  :action     => 'update',
-                  :id         => self.project_id,
                   :command    => 'suspend'}
-          end          
-          return a
-        end
-    end
-    state :suspended do
+          end
+        end        
+        a << suspend_project_command if current_user_is_account_admin?
+        return a
+      end #end def
+    end #end state
+    state :withdrawn do
       def status
-        return "Suspended" unless self.project.suspended?
-        return "Project Suspended" #not membership
+        status_string_for_current_state
       end
       def commands
-        #depends on:
-          #state of the project
-          #access state of the account user
-          #access state of the project user
-          #whether current user is the member
         a = []
         if self.project.suspended? 
-          if current_user_is_account_admin?
-            a << {:text       => 'Reinstate project', 
-                  :controller => 'projects',
-                  :action     => 'update',
-                  :id         => self.project_id,
-                  :command    => 'reinstate'}
-          end
+          return reinstate_project_command if current_user_is_account_admin?
           return a
-        end  
-
+        end         
+        if current_user_is_member?
+          a << {:text       => 'Rejoin', 
+                :controller => 'memberships',
+                :action     => 'update',
+                :id         =>  self.id,
+                :command    => 'rejoin'}
+        else #current user is not member
+          if current_user_is_project_admin?
+            a << {:text       => 'Suspend membership', 
+                  :controller => 'memberships',
+                  :action     => 'update',
+                  :id         =>  self.id,
+                  :command    => 'suspend'}
+          end
+        end
+        a << suspend_project_command if current_user_is_account_admin?
+        return a
+      end #end def
+    end #end state
+    state :suspended do
+      def status
+        status_string_for_current_state
+      end
+      def commands
+        a = []
+        if self.project.suspended? 
+          return reinstate_project_command if current_user_is_account_admin?
+          return a
+        end         
         if current_user_is_project_admin?
           a << {:text       => 'Reinstate membership', 
                 :controller => 'memberships',
@@ -249,28 +170,20 @@ class Membership < ActiveRecord::Base
                 :id         =>  self.id,
                 :command    => 'reinstate'}
         end
-
-        if current_user_is_account_admin?
-          a << {:text       => 'Suspend project', 
-                :controller => 'projects',
-                :action     => 'update',
-                :id         => self.project_id,
-                :command    => 'suspend'}
-        end          
+        a << suspend_project_command if current_user_is_account_admin?
         return a
-        end
-    end
+      end #end def
+    end #end state
     state :removed do
       def status
-        return "Removed" unless self.project.suspended?
-        return "Project Suspended" 
+        status_string_for_current_state
       end
       def commands
         a = []
         return a
       end
     end
-  end 
+  end
   
   state_machine :access_state, :initial => :observer, :namespace => 'access' do
     event :promote do
@@ -280,6 +193,7 @@ class Membership < ActiveRecord::Base
       transition :admin => :contributor, :contributor => :observer
     end
     
+
     state :observer do
     end
     state :contributor do
@@ -289,7 +203,7 @@ class Membership < ActiveRecord::Base
   end
   
   private
-    def invite
+    def lookup_id_from_email
       self.user_id = User.where(:email => "#{self.user_email}").first.id if self.user_email
     end
     def current_user_is_member?
@@ -303,4 +217,22 @@ class Membership < ActiveRecord::Base
       id = self.project_id
       return User.find(@current_user_id).memberships.where(:project_id => id).first.access_admin?
     end    
+    def status_string_for_current_state 
+      return self.state unless self.project.suspended?
+      return "Project Suspended" 
+    end
+    def reinstate_project_command
+      return [{:text       => 'Reinstate', 
+               :controller => 'projects',
+               :action     => 'update',
+               :id         => self.project_id,
+               :command    => 'reinstate'}]      
+    end
+    def suspend_project_command
+      return {:text       => 'Suspend', 
+              :controller => 'projects',
+              :action     => 'update',
+              :id         => self.project_id,
+              :command    => 'suspend'}
+    end
 end

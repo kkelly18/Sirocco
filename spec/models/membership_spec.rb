@@ -42,7 +42,18 @@ describe Membership do
         end
         it "should be set to invited by default" do
           @membership.should be_invited
-        end    
+        end
+        
+        it "should be uninvited" do
+          @membership.uninvite
+          @membership.should be_uninvited
+        end
+        
+        it "should be invited" do
+          @membership.uninvite
+          @membership.invite
+          @membership.should be_invited
+        end      
 
         it "should be enrolled" do
           @membership.enroll

@@ -102,6 +102,100 @@ describe "Membership status and commands" do
     end
   end
   
+  describe "when current_user is the member and project is suspended and" do
+    before(:each) do
+      @current_user = @user
+      @sponsorship = create_sponsorship(@account, @user, @current_user)
+      @sponsored_project = create_sponsored_project(@account, @current_user)
+      @sponsored_project.suspend #suspend
+      @membership = create_membership(@sponsored_project, @user, @current_user)
+      @membership.current_user_id = @current_user.id
+    end
+  
+    describe "where the member is invited" do
+      before(:each) do
+        #nothing
+      end
+      it "'Status' should return 'suspended'" do
+        @membership.should be_invited
+        @membership.status.should =~ /Project Suspended/i
+      end
+      it "'commands' should return nothing" do
+        c = @membership.commands
+        c.should be_empty
+      end
+    end
+    describe "where the member is uninvited" do
+      before(:each) do
+        @membership.uninvite
+      end
+      it "'Status' should return 'suspended'" do
+        @membership.should be_uninvited
+        @membership.status.should =~ /suspended/i
+      end
+      it "'commands' should return nothing" do
+        c = @membership.commands
+        c.should be_empty
+      end
+    end
+    describe "where the member is enrolled" do
+      before(:each) do
+        @membership.enroll
+      end
+      it "'Status' should return 'suspended'" do
+        @membership.should be_enrolled
+        @membership.status.should =~ /suspended/i
+      end
+      it "'commands' should return nothing" do
+        c = @membership.commands
+        c.should be_empty
+      end
+    end
+    describe "where the member is suspended" do
+      before(:each) do
+        @membership.enroll
+        @membership.suspend
+      end
+      it "'Status' should return 'suspended'" do
+        @membership.should be_suspended
+        @membership.status.should =~ /suspended/i
+      end
+      it "'commands' should return nothing" do
+        c = @membership.commands
+        c.should be_empty
+      end
+    end
+    describe "where the member is withdrawn" do
+      before(:each) do
+        @membership.enroll
+        @membership.withdraw
+      end
+      it "'Status' should return 'suspended'" do
+        @membership.should be_withdrawn
+        @membership.status.should =~ /suspended/i
+      end
+      it "'commands' should return nothing" do
+        c = @membership.commands
+        c.should be_empty
+      end
+    end
+    describe "where the member is removed" do
+      before(:each) do
+        @membership.enroll
+        @membership.withdraw
+        @membership.remove
+      end
+      it "'Status' should return 'suspended'" do
+        @membership.should be_removed
+        @membership.status.should =~ /suspended/i
+      end
+      it "'commands' should return nothing" do
+        c = @membership.commands
+        c.should be_empty
+      end
+    end
+  end
+  
   describe "when current_user is the member and a project admin and" do
     before(:each) do
       @current_user = @user
@@ -392,8 +486,22 @@ describe "Membership status and commands" do
       end
     end
     describe "where the member is removed" do
+      before(:each) do
+        @membership.enroll
+        @membership.withdraw
+        @membership.remove
+      end
+      it "'Status' should return 'Removed'" do
+        @membership.should be_removed
+        @membership.status.should =~ /removed/i
+      end
+      it "'commands' should return nothing" do
+        c = @membership.commands
+        c.should be_empty
+      end
+    end
   end
-
+  
   describe "when current_user is not the member but is a project admin and" do
     before(:each) do
       @current_user             = create_user
