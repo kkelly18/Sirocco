@@ -59,7 +59,7 @@ describe "User#Account" do
     page.find('td.index_item', :text => 'test_project').click_link('Withdraw')
     save_and_open_page
   end
-  it "should allow an admin to suspend a project" do
+  it "should allow an account admin to suspend a project" do
     pending
   end
   it "should allow an admin to reinstate a suspended project" do

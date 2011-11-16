@@ -1,14 +1,15 @@
 <tr>
   <td class="index_item">
+	<% sponsorship.current_user_id = @current_user.id %>
     <span class="item_link" >
       <%= link_to sponsorship.account.name, account_path(sponsorship.account.id) %>
     </span>
 	<span class="item_commands" >
-	  <%= render :partial => 'accounts/sponsorship_command', :collection => sponsorship_commands(sponsorship) %>	  
+	  <%= render :partial => 'accounts/sponsorship_command', :collection => sponsorship.commands %>	  
 	</span>
     <br/>
 	<span class="item_status">
-	  <%= sponsorship_status(sponsorship) %>
+	  <%= sponsorship.status %>
 	</span>
   </td>
 </tr>
