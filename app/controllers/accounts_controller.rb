@@ -13,7 +13,11 @@ class AccountsController < ApplicationController
       when @command == nil || @command =~ /PROJECTS/i 
         @items_text = 'SHOW TEAM'
         @items_command = 'TEAM'
-        @command_form_partial = 'projects/new_project'
+        if current_user_is_account_admin?
+          @command_form_partial = 'projects/new_project'
+        else
+          @command_form_partial = nil
+        end
         @items_partial = 'projects/index'
       when @command =~ /TEAM/i
         @team_members = @account.team_members.paginate(:per_page => 6, :page => params[:page])
@@ -25,7 +29,11 @@ class AccountsController < ApplicationController
       else
         @items_text = 'SHOW TEAM'
         @items_command = 'TEAM'
-        @command_form_partial = 'projects/new_project'
+        if current_user_is_account_admin?(@account)
+          @command_form_partial = 'projects/new_project'
+        else
+          @command_form_partial = nil
+        end
         @items_partial = 'projects/index'
     end    
   end
@@ -43,5 +51,15 @@ class AccountsController < ApplicationController
       render 'new'
     end        
   end
+  
+  private
+    def current_user_is_account_admin?
+      u = User.find(@current_user).sponsorships.where(:account_id => @account.id).first
+      if u
+        return u.access_admin?
+      else
+        return false
+      end
+    end
 
 end

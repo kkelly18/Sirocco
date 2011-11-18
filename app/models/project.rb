@@ -43,7 +43,8 @@ class Project < ActiveRecord::Base
     def update_membership
       m = self.memberships.build( :project_id => 1,
                               :user_id => self.created_by, 
-                              :created_by => self.created_by)
+                              :created_by => self.created_by,
+                              :current_user_id => self.created_by)
       m.enroll #creating own project, so enroll thy self
       m.promote_access #creating own project, so make self admin
     end

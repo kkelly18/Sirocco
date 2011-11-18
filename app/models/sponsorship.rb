@@ -2,7 +2,12 @@ class Sponsorship < ActiveRecord::Base
   attr_accessor :user_email, #set in create, used for inviting users to accounts
                 :current_user_id #set in show, used for showing commands and logging actions
 
-  attr_accessible :user_id, :account_id, :created_by, :enroll_at, :suspend_at, :admin, :user_email
+  attr_accessible :user_id, 
+                  :account_id, 
+                  :created_by, 
+                  :admin, 
+                  :user_email, 
+                  :current_user_id
 
   belongs_to :user,        :class_name => "User"
   belongs_to :account,     :class_name => "Account"
@@ -11,9 +16,10 @@ class Sponsorship < ActiveRecord::Base
     lookup_id_from_email
   end
     
-  validates :user_id,      :presence => true
-  validates :account_id,   :presence => true
-  validates :created_by,   :presence => true
+  validates :user_id,          :presence => true
+  validates :account_id,       :presence => true
+  validates :created_by,       :presence => true
+  validates :current_user_id,  :presence => true
   
   scope :all, joins(:account).includes(:account)
   
@@ -213,7 +219,8 @@ class Sponsorship < ActiveRecord::Base
       return User.find(@current_user_id).sys_admin?
     end    
     def status_string_for_current_state 
-      return self.state 
+      return self.state unless self.account.suspended?
+      return "Account Suspended"
     end
     def reinstate_account_command
       return [{:text       => 'Reinstate', 

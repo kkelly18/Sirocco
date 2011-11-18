@@ -12,6 +12,7 @@ class MembershipsController < ApplicationController
   def update
     #todo implement command pattern
     membership = Membership.find(params[:id])
+    membership.current_user_id = @current_user.id
     command = params[:command]
     case
       when command =~ /uninvite/        then membership.uninvite

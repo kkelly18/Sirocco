@@ -135,8 +135,8 @@ class User < ActiveRecord::Base
   end
 
   def create_personal_account
-    @personal_account = Account.new(:name => @personal_account_name, :created_by => self.id)
-    @personal_account.save!
+    @personal_account = Account.new(:name => @personal_account_name, :created_by => self.id, :current_user_id => self.id)
+    @personal_account.save
   end
 
 end

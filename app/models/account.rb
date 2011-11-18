@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-  attr_accessible :name, :created_by, :suspend_at
+  attr_accessible :name, :created_by
   
   has_many :sponsorships, :foreign_key => "account_id",
                         :dependent => :destroy  
@@ -39,8 +39,9 @@ class Account < ActiveRecord::Base
   private
     def update_sponsorship
       s = self.sponsorships.build(:account_id => 1,
-                              :user_id    => self.created_by, 
-                              :created_by => self.created_by)
+                                  :user_id    => self.created_by, 
+                                  :created_by => self.created_by,
+                                  :current_user_id => self.created_by)
       s.enroll #creating own account, so enroll thy self
       s.promote_access #creating own account, so make self admin
     end

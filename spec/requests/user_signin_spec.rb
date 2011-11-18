@@ -5,7 +5,7 @@ describe "User signin" do
   it "should allow an existing user to sign in" do
     account = Factory(:account) #use as the personal account
     user = Factory(:user)
-    sponsorship = Factory(:sponsorship, :account_id => account.id, :user_id => user.id, :created_by => user.id)
+    sponsorship = Factory(:sponsorship, :account_id => account.id, :user_id => user.id, :created_by => user.id, :current_user_id => user.id)
     3.times do
       project = Factory(:project, :account_id => account.id, :created_by => user.id)
       #memberships are created during active record callbacks

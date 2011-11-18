@@ -5,7 +5,7 @@ describe "User#Home" do
   it "should navigate a signedin user to Home " do
     user = Factory(:user)
     account = Factory(:account) #use as the personal account
-    sponsorship = Factory(:sponsorship, :account_id => account.id, :user_id => user.id, :created_by => user.id)
+    sponsorship = Factory(:sponsorship, :account_id => account.id, :user_id => user.id, :created_by => user.id, :current_user_id => user.id)
     project = Factory(:project, :account_id => account.id, :created_by => user.id)
     #memberships are created during active record callbacks
 
@@ -26,7 +26,7 @@ describe "User#Home" do
   it "should show a list of projects the user is a member of " do
     account = Factory(:account) #use as the personal account
     user = Factory(:user)
-    sponsorship = Factory(:sponsorship, :account_id => account.id, :user_id => user.id, :created_by => user.id)
+    sponsorship = Factory(:sponsorship, :account_id => account.id, :user_id => user.id, :created_by => user.id, :current_user_id => user.id)
     3.times do
       project = Factory(:project, :account_id => account.id, :created_by => user.id)
       #memberships are created during active record callbacks
@@ -49,7 +49,7 @@ describe "User#Home" do
     user = Factory(:user)
     3.times do
       account = Factory(:account) #use as the personal account
-      sponsorship = Factory(:sponsorship, :account_id => account.id, :user_id => user.id, :created_by => user.id)
+      sponsorship = Factory(:sponsorship, :account_id => account.id, :user_id => user.id, :created_by => user.id, :current_user_id => user.id)
       project = Factory(:project, :account_id => account.id, :created_by => user.id)
       #memberships are created during active record callbacks
     end    

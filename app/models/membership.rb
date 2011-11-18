@@ -2,7 +2,11 @@ class Membership < ActiveRecord::Base
   attr_accessor :user_email, #set in create, used for inviting users to projects
                 :current_user_id #set in show, used for showing commands and logging acctions
 
-  attr_accessible :user_id, :project_id, :created_by, :user_email
+  attr_accessible :user_id, 
+                  :project_id, 
+                  :created_by, 
+                  :user_email,
+                  :current_user_id
 
   belongs_to :user,        :class_name => "User"
   belongs_to :project,     :class_name => "Project"
@@ -11,9 +15,10 @@ class Membership < ActiveRecord::Base
     lookup_id_from_email
   end
 
-  validates :user_id,      :presence => true
-  validates :project_id,   :presence => true
-  validates :created_by,   :presence => true
+  validates :user_id,         :presence => true
+  validates :project_id,      :presence => true
+  validates :created_by,      :presence => true
+  validates :current_user_id, :presence => true
 
   scope :in_the_set_of, lambda {|project| where(:project_id => project).joins(:project).includes(:project)}
   scope :all, joins(:project).includes(:project)

@@ -15850,7 +15850,7 @@ Logout}</string>
 		</dict>
 	</array>
 	<key>ModificationDate</key>
-	<string>2011-11-15 14:28:42 +0000</string>
+	<string>2011-11-18 15:51:29 +0000</string>
 	<key>Modifier</key>
 	<string>Kevin Kelly</string>
 	<key>NotesVisible</key>
@@ -15884,7 +15884,7 @@ Logout}</string>
 		<key>NSPaperName</key>
 		<array>
 			<string>string</string>
-			<string>C6442797-9953-4168-BB5B-3730287E1E5A</string>
+			<string>A1AF4F1C-5856-4CAD-B3CB-EDBC0E98B136</string>
 		</array>
 		<key>NSPaperSize</key>
 		<array>
@@ -16782,8 +16782,8 @@ eCommerce gateway: TBD\
 									<real>0.0</real>
 									<key>Points</key>
 									<array>
-										<string>{1002.6973, 142.77051}</string>
-										<string>{839.51947, 97.109406}</string>
+										<string>{1002.6973, 148.28462}</string>
+										<string>{839.51947, 100.26536}</string>
 									</array>
 									<key>Style</key>
 									<dict>
@@ -16807,7 +16807,7 @@ eCommerce gateway: TBD\
 								</dict>
 								<dict>
 									<key>Bounds</key>
-									<string>{{957.69727, 142.77051}, {90, 36}}</string>
+									<string>{{957.69727, 148.28462}, {90, 37.859203}}</string>
 									<key>Class</key>
 									<string>ShapedGraphic</string>
 									<key>ID</key>
@@ -16838,7 +16838,7 @@ eCommerce gateway: TBD\
 								</dict>
 								<dict>
 									<key>Bounds</key>
-									<string>{{757.39642, 225.78387}, {2, 12}}</string>
+									<string>{{757.39642, 235.58514}, {2, 12}}</string>
 									<key>Class</key>
 									<string>ShapedGraphic</string>
 									<key>FitText</key>
@@ -16879,7 +16879,7 @@ eCommerce gateway: TBD\
 								</dict>
 								<dict>
 									<key>Bounds</key>
-									<string>{{960.27881, 36}, {2, 12}}</string>
+									<string>{{960.27881, 35.999985}, {2, 12}}</string>
 									<key>Class</key>
 									<string>ShapedGraphic</string>
 									<key>FitText</key>
@@ -16920,7 +16920,7 @@ eCommerce gateway: TBD\
 								</dict>
 								<dict>
 									<key>Bounds</key>
-									<string>{{782.4035, 180.24677}, {2, 12}}</string>
+									<string>{{782.4035, 187.6963}, {2, 12}}</string>
 									<key>Class</key>
 									<string>ShapedGraphic</string>
 									<key>FitText</key>
@@ -16979,8 +16979,8 @@ eCommerce gateway: TBD\
 									<real>0.0</real>
 									<key>Points</key>
 									<array>
-										<string>{783.40338, 210.90979}</string>
-										<string>{783.40338, 178.77051}</string>
+										<string>{783.40338, 219.94298}</string>
+										<string>{783.40338, 186.14383}</string>
 									</array>
 									<key>Style</key>
 									<dict>
@@ -17004,7 +17004,7 @@ eCommerce gateway: TBD\
 								</dict>
 								<dict>
 									<key>Bounds</key>
-									<string>{{738.40338, 210.90979}, {90, 36}}</string>
+									<string>{{738.40338, 219.94296}, {90, 37.859203}}</string>
 									<key>Class</key>
 									<string>ShapedGraphic</string>
 									<key>ID</key>
@@ -17053,8 +17053,8 @@ eCommerce gateway: TBD\
 									<real>0.0</real>
 									<key>Points</key>
 									<array>
-										<string>{783.40338, 142.77051}</string>
-										<string>{839.51947, 97.109406}</string>
+										<string>{783.40338, 148.28462}</string>
+										<string>{839.51947, 100.26536}</string>
 									</array>
 									<key>Style</key>
 									<dict>
@@ -17078,7 +17078,7 @@ eCommerce gateway: TBD\
 								</dict>
 								<dict>
 									<key>Bounds</key>
-									<string>{{738.40338, 142.77051}, {90, 36}}</string>
+									<string>{{738.40338, 148.28462}, {90, 37.859203}}</string>
 									<key>Class</key>
 									<string>ShapedGraphic</string>
 									<key>ID</key>
@@ -17128,8 +17128,8 @@ User}</string>
 									<real>0.0</real>
 									<key>Points</key>
 									<array>
-										<string>{900.47992, 142.77051}</string>
-										<string>{839.51947, 97.109406}</string>
+										<string>{900.47992, 148.28462}</string>
+										<string>{839.51947, 100.26536}</string>
 									</array>
 									<key>Style</key>
 									<dict>
@@ -17171,8 +17171,8 @@ User}</string>
 									<real>0.0</real>
 									<key>Points</key>
 									<array>
-										<string>{900.47992, 210.90979}</string>
-										<string>{900.47992, 178.77051}</string>
+										<string>{900.47992, 219.94298}</string>
+										<string>{900.47992, 186.14383}</string>
 									</array>
 									<key>Style</key>
 									<dict>
@@ -17196,7 +17196,7 @@ User}</string>
 								</dict>
 								<dict>
 									<key>Bounds</key>
-									<string>{{855.47992, 142.77051}, {90, 36}}</string>
+									<string>{{855.47992, 148.28462}, {90, 37.859203}}</string>
 									<key>Class</key>
 									<string>ShapedGraphic</string>
 									<key>ID</key>
@@ -17228,7 +17228,7 @@ User}</string>
 								</dict>
 								<dict>
 									<key>Bounds</key>
-									<string>{{855.47992, 210.90979}, {90, 36}}</string>
+									<string>{{855.47992, 219.94296}, {90, 37.859203}}</string>
 									<key>Class</key>
 									<string>ShapedGraphic</string>
 									<key>ID</key>
@@ -17259,7 +17259,7 @@ User}</string>
 								</dict>
 								<dict>
 									<key>Bounds</key>
-									<string>{{794.51947, 61.109406}, {90, 36}}</string>
+									<string>{{794.51947, 62.406158}, {90, 37.859203}}</string>
 									<key>Class</key>
 									<string>ShapedGraphic</string>
 									<key>ID</key>
@@ -17294,7 +17294,7 @@ User}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{685.79773, 36}, {612, 792}}</string>
+							<string>{{685.79773, 35.999969}, {612, 832.90253}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>ID</key>
@@ -17393,7 +17393,9 @@ Set a user as project administrator\
 
 \b \cf0 System Administrator (SA)
 \b0 \
-Suspend users}</string>
+Suspend users\
+Suspend project\
+Suspend account}</string>
 								<key>VerticalPad</key>
 								<integer>10</integer>
 							</dict>
@@ -19741,8 +19743,8 @@ delete_at          : datetime\
 					<integer>0</integer>
 					<key>Points</key>
 					<array>
-						<string>{540.49982, 1020.5114}</string>
-						<string>{611.50018, 1018.4811}</string>
+						<string>{540.49982, 1020.5131}</string>
+						<string>{611.50018, 1018.4839}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -51651,8 +51653,8 @@ analysis}</string>
 					<integer>1553</integer>
 					<key>Points</key>
 					<array>
-						<string>{2121.9285, 858.92944}</string>
-						<string>{2141.1406, 859.19299}</string>
+						<string>{2121.9285, 858.83575}</string>
+						<string>{2141.1406, 859.08234}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -52309,8 +52311,8 @@ analysis}</string>
 					<integer>1534</integer>
 					<key>Points</key>
 					<array>
-						<string>{2077.8494, 825.68634}</string>
-						<string>{2137.207, 827.50037}</string>
+						<string>{2077.8494, 825.68353}</string>
+						<string>{2137.207, 827.49591}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -53966,8 +53968,8 @@ Leverage UX talent}</string>
 					<integer>1490</integer>
 					<key>Points</key>
 					<array>
-						<string>{1821.1764, 1273.3384}</string>
-						<string>{1858.0712, 1277.7853}</string>
+						<string>{1821.1764, 1273.3188}</string>
+						<string>{1858.3522, 1277.7853}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -54286,8 +54288,8 @@ Leverage UX talent}</string>
 					<integer>1481</integer>
 					<key>Points</key>
 					<array>
-						<string>{2117.0974, 1066.0981}</string>
-						<string>{2193.0886, 1076.188}</string>
+						<string>{2117.0972, 1066.0981}</string>
+						<string>{2193.0884, 1076.188}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -54792,7 +54794,7 @@ Leverage UX talent}</string>
 					<key>Points</key>
 					<array>
 						<string>{1854.095, 992.362}</string>
-						<string>{1910.1783, 993.25458}</string>
+						<string>{1910.1783, 993.25464}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -55317,8 +55319,8 @@ Leverage UX talent}</string>
 					<integer>1454</integer>
 					<key>Points</key>
 					<array>
-						<string>{1147.1481, 783.7984}</string>
-						<string>{1176.005, 802.55225}</string>
+						<string>{1147.1478, 783.7984}</string>
+						<string>{1176.0043, 802.55225}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -56142,8 +56144,8 @@ Analysis on a handout -- triple check spreadsheet math and assumptions\
 					<integer>1431</integer>
 					<key>Points</key>
 					<array>
-						<string>{1128.3699, 783.7984}</string>
-						<string>{1090.9036, 816.55225}</string>
+						<string>{1128.3698, 783.7984}</string>
+						<string>{1090.9034, 816.55225}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -56983,7 +56985,7 @@ architecture track}</string>
 					<key>Points</key>
 					<array>
 						<string>{1409.6976, 540.43921}</string>
-						<string>{1581.723, 562.44849}</string>
+						<string>{1581.7229, 562.44843}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -57169,7 +57171,7 @@ architecture track}</string>
 					<key>Points</key>
 					<array>
 						<string>{1430.9856, 531.50934}</string>
-						<string>{1654.514, 525.83319}</string>
+						<string>{1654.514, 525.83313}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -57457,8 +57459,8 @@ architecture track}</string>
 					<integer>1339</integer>
 					<key>Points</key>
 					<array>
-						<string>{1320.6022, 719.91852}</string>
-						<string>{1336.6158, 711.06573}</string>
+						<string>{1320.6021, 719.91852}</string>
+						<string>{1336.6157, 711.06573}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -57519,8 +57521,8 @@ architecture track}</string>
 					<integer>1337</integer>
 					<key>Points</key>
 					<array>
-						<string>{1380.5131, 719.91852}</string>
-						<string>{1363.0679, 711.06573}</string>
+						<string>{1380.514, 719.91852}</string>
+						<string>{1363.0701, 711.06573}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -59163,8 +59165,8 @@ architecture track}</string>
 					<integer>1347</integer>
 					<key>Points</key>
 					<array>
-						<string>{383.01013, 691.94678}</string>
-						<string>{460.57202, 756.09467}</string>
+						<string>{383.0101, 691.94672}</string>
+						<string>{460.57211, 756.09473}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -60857,11 +60859,11 @@ architecture track}</string>
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
-		<integer>2</integer>
+		<integer>0</integer>
 		<key>ExpandedCanvases</key>
 		<array/>
 		<key>Frame</key>
-		<string>{{222, -1050}, {1680, 1050}}</string>
+		<string>{{0, 0}, {1680, 1028}}</string>
 		<key>ListView</key>
 		<false/>
 		<key>OutlineWidth</key>
@@ -60875,9 +60877,9 @@ architecture track}</string>
 		<key>SidebarWidth</key>
 		<integer>137</integer>
 		<key>VisibleRegion</key>
-		<string>{{928.39807, 13.147249}, {1545.3077, 905.13751}}</string>
+		<string>{{553.13586, 317.21835}, {1109.1753, 633.71082}}</string>
 		<key>Zoom</key>
-		<real>2.059999942779541</real>
+		<real>2.869999885559082</real>
 		<key>ZoomValues</key>
 		<array>
 			<array>
@@ -60892,8 +60894,8 @@ architecture track}</string>
 			</array>
 			<array>
 				<string>Project Notes</string>
-				<real>1.434999942779541</real>
-				<real>2.8599998950958252</real>
+				<real>2.869999885559082</real>
+				<real>1.440000057220459</real>
 			</array>
 			<array>
 				<string>Product Backlog Annotations</string>

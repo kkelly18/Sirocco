@@ -5,8 +5,9 @@ describe Membership do
       @current_user = @user = Factory(:user)
       @project = Factory(:project)
       @attr = {:project_id  => @project.id, 
-        :user_id     => @user.id, 
-        :created_by  => @current_user.id}
+               :user_id     => @user.id, 
+               :created_by  => @current_user.id,
+               :current_user_id => @current_user.id}
       end
 
       it "should create a new instance from a User given valid attributes"  do    

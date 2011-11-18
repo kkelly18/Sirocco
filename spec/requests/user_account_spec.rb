@@ -1,95 +1,136 @@
 require 'spec_helper'
+require 'spec_models_helper'
+
 #TOOL: save_and_open_page
 
-describe "User#Account" do
+describe "Accounts#Show " do
   before(:each) do
-    @account     = Factory(:account) #use as the personal account
-    @user        = Factory(:user)
-    @sponsorship = Factory(:sponsorship, :account_id => @account.id, :user_id => @user.id, :created_by => @user.id)
+    @user        = create_user
+    @account     = create_account(@user) # a new account, in addition to the personal account
+    #creator sponsorships are are built during account creation
+
+    @projects = []
     3.times do
-      @project = Factory(:project, :account_id => @account.id, :created_by => @user.id)
-      #memberships are created during active record callbacks
+      @projects << create_sponsored_project(@account, @user)
+      #creator memberships are built during project creation
     end
+
     visit root_path               
     click_link   "Sign in"               
-      fill_in      "Email",    :with => @user.email
-      fill_in      "Password", :with => @user.password  
+    fill_in      "Email",    :with => @user.email
+    fill_in      "Password", :with => @user.password  
     click_button "Sign in"
     click_link   "SHOW ACCOUNTS"
   end
-  
-  it "should navigate a signedin user to an account they are sponsored by" do        
-    click_link   "#{@account.name}"
-    page.should have_selector('title',:text => "Account")
-    page.should have_selector('h1',:text => "#{@account.name}")
-    page.should have_selector("a", :href => user_path(@user), :text => "Home")    
-    page.should have_selector("a", :href => account_path(@account), :text => "SHOW TEAM")
+
+  describe "ACCOUNTS" do
+    it "should show two accounts" do
+      page.should have_selector("td.index_item", :count=>2)
+    end
+    it "should navigate signedin user to their personal account" do
+      click_link   "Personal Account"
+      page.should have_selector('title',:text => "Account")
+      page.should have_selector('h1',:text => "Personal Account")
+      page.should have_selector("a", :href => user_path(@user), :text => "Home")    
+      page.should have_selector("a", :href => account_path(@account), :text => "SHOW TEAM")
+    end
+    it "should navigate signedin user to a sponsored account" do
+      click_link   "#{@account.name}"
+      page.should have_selector('title',:text => "Account")
+      page.should have_selector('h1',:text => "#{@account.name}")
+      page.should have_selector("a", :href => user_path(@user), :text => "Home")    
+      page.should have_selector("a", :href => account_path(@account), :text => "SHOW TEAM")
+    end
+    it "should navigate back to HOME from Accounts#Show" do
+      click_link   "#{@account.name}"
+      click_link "Home"
+      page.should have_selector('title', :text => "Home")
+    end
+    it "should show a list of projects sponsored by this account" do
+      click_link   "#{@account.name}"
+      page.should have_selector("td.index_item", :count=>3)
+    end
+    it "should only show projects sponsored by this account" do
+      new_account     = create_account(@user)
+      different_sponsorship_same_user = create_sponsorship(new_account, @user, @user)
+      new_project_same_user_sponsored_by_new_account = create_sponsored_project(new_account, @user)
+      click_link   "#{@account.name}"
+      page.should have_selector("td.index_item", :count=>3)
+    end
+    it "should enable withdraw commmand" do
+      click_link   "#{@account.name}"
+      item = page.find('td.index_item', :text => "#{@projects[0].name}")
+      item.click_link('Withdraw')
+      item = page.find('td.index_item', :text => "#{@projects[0].name}")
+      item.find('a', :text => 'Rejoin')
+    end
+
+    describe "where current user is not account admin" do
+      before (:each) do
+        @sponsorship = User.find(@user.id).sponsorships.where(:account_id => @account.id).first
+        @sponsorship.current_user_id = @user.id
+        @sponsorship.demote_access
+        click_link  "#{@account.name}"    
+      end
+
+      it "should not show create new project dialog" do
+        page.should_not have_field('project_name')
+      end
+      it "should not show suspend command on items" do
+        item = page.find('td.index_item', :text => "#{@projects[0].name}")
+        item.should_not have_link('Suspend')
+      end
+    end
+
+    describe "where current user is account admin" do
+      before (:each) do
+        click_link  "#{@account.name}"    
+      end
+      
+      it "should show create new project dialog" do
+        page.should have_field('project_name')
+      end
+      it "should add another project" do
+        page.find_by_id 'project_name'
+        fill_in "project_name", :with => 'test_project'
+        click_button "Create"
+        page.should have_selector("div.flash.success", :text => "test_project")        
+        page.should have_selector("td.index_item", :count=>4)
+      end
+      it "should enable suspend command" do
+        item = page.find('td.index_item', :text => "#{@projects[0].name}")
+        item.click_link('Suspend')
+        item = page.find('td.index_item', :text => "#{@projects[0].name}")
+        item.should have_link('Reinstate')
+      end
+      it "should reinstate a suspended project" do
+        item = page.find('td.index_item', :text => "#{@projects[0].name}")
+        item.click_link('Suspend')
+        item = page.find('td.index_item', :text => "#{@projects[0].name}")
+        item.should have_link('Reinstate')
+        item.click_link('Reinstate')
+        item = page.find('td.index_item', :text => "#{@projects[0].name}")
+        item.should have_link('Suspend')
+      end
+    end
   end
-  it "should navigate back to home from Account show" do
-    click_link   "#{@account.name}"
-    click_link "Home"
-    page.should have_selector('title', :text => "Home")
+
+  describe "TEAM" do
+    it "should show a list of users sponsored by this account" do
+      pending
+    end
+    it "should not show a user that isn't in this account" do
+      pending
+    end
+    it "should not show invite user dialog" do
+      pending
+    end      
+    it "should suspend a user from the account" do
+      pending
+    end
+    it "should add another user" do
+      pending
+    end
   end
-  it "should show a list of projects sponsored by this account" do
-    click_link   "#{@account.name}"
-    page.should have_selector("td.index_item", :count=>3)
-  end
-  it "should not show a project that isn't sponsored by this account" do
-    new_account     = Factory(:account) #use as the personal account
-    different_sponsorship_same_user = Factory(:sponsorship, :account_id => new_account.id, :user_id => @user.id, :created_by => @user.id)
-    new_project_same_user_sponsored_by_new_account = Factory(:project, :account_id => new_account.id, :created_by => @user.id)
-    click_link   "#{@account.name}"
-    page.should have_selector("td.index_item", :count=>3)
-  end
-  it "should allow account admin to add (sponsor) another project" do
-    click_link   "#{@account.name}"
-    page.find_by_id 'project_name'
-    fill_in "project_name", :with => 'test_project'
-    click_button "Create"
-    page.should have_selector("div.flash.success", :text => "test_project")        
-    page.should have_selector("td.index_item", :count=>4)
-  end
-  it "should show user enrolled in new project and the withdraw commmand" do
-    click_link   "#{@account.name}"
-    page.find_by_id 'project_name'
-    fill_in "project_name", :with => 'test_project'
-    click_button "Create"
-    save_and_open_page
-    page.find('td.index_item', :text => 'test_project').find('a', :text => 'Withdraw')
-    page.find('td.index_item', :text => 'test_project').click_link('Withdraw')
-    save_and_open_page
-  end
-  it "should allow an account admin to suspend a project" do
-    pending
-  end
-  it "should allow an admin to reinstate a suspended project" do
-    pending
-  end
-  it "should not show create new project dialog to non-admins" do
-    pending
-  end
-  it "should not allow a non-admin to suspend a project" do
-    pending
-  end
-  it "should show a list of users sponsored by this account" do
-    pending
-  end
-  it "should not show a user that isn't in this account" do
-    pending
-  end
-  it "should allow an admin to suspend a user from the account" do
-    pending
-  end
-  it "should not allow a non admin to suspend a user" do
-    pending
-  end
-  it "should allow account admin to add another user" do
-    pending
-  end
-  it "should not show invite user dialog to non-admins" do
-    pending
-  end      
-  it "should navigate a signedin user to an account they are sponsored by, but not an admin for" do
-    pending
-  end
+
 end
