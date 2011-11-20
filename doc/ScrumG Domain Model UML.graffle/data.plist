@@ -15850,7 +15850,7 @@ Logout}</string>
 		</dict>
 	</array>
 	<key>ModificationDate</key>
-	<string>2011-11-18 15:51:29 +0000</string>
+	<string>2011-11-19 17:24:14 +0000</string>
 	<key>Modifier</key>
 	<string>Kevin Kelly</string>
 	<key>NotesVisible</key>
@@ -15884,7 +15884,7 @@ Logout}</string>
 		<key>NSPaperName</key>
 		<array>
 			<string>string</string>
-			<string>A1AF4F1C-5856-4CAD-B3CB-EDBC0E98B136</string>
+			<string>DB0F3901-A08C-4E80-BE2B-A507B9F39DDF</string>
 		</array>
 		<key>NSPaperSize</key>
 		<array>
@@ -18065,7 +18065,7 @@ Suspend account}</string>
 					<real>24</real>
 					<key>Points</key>
 					<array>
-						<string>{1035, 664.15948}</string>
+						<string>{1035, 671.4353}</string>
 						<string>{1121.5, 714}</string>
 					</array>
 					<key>Style</key>
@@ -19164,7 +19164,7 @@ delete_at          : datetime\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{846.18335, 458.08392}, {58.199219, 24}}</string>
+					<string>{{840.41742, 469.85544}, {58.199219, 24}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -19226,7 +19226,7 @@ delete_at          : datetime\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{900.22656, 967.48389}, {94, 24}}</string>
+					<string>{{900.22656, 971.71753}, {94, 24}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -19288,7 +19288,7 @@ delete_at          : datetime\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{145.72327, 982.78369}, {94, 24}}</string>
+					<string>{{145.72327, 987.07562}, {94, 24}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -19352,7 +19352,7 @@ delete_at          : datetime\
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{239.03256, 463.80054}, {59, 24}}</string>
+					<string>{{244.18848, 475.80405}, {59, 24}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -19434,7 +19434,7 @@ delete_at          : datetime\
 					<real>-1</real>
 					<key>Points</key>
 					<array>
-						<string>{188.72327, 729}</string>
+						<string>{188.72327, 743}</string>
 						<string>{297, 1004.0109}</string>
 					</array>
 					<key>Style</key>
@@ -19481,7 +19481,7 @@ delete_at          : datetime\
 					<real>-1</real>
 					<key>Points</key>
 					<array>
-						<string>{693, 470.08392}</string>
+						<string>{693, 481.85544}</string>
 						<string>{941.22675, 594}</string>
 					</array>
 					<key>Style</key>
@@ -19528,7 +19528,7 @@ delete_at          : datetime\
 					<real>-1</real>
 					<key>Points</key>
 					<array>
-						<string>{414, 475.80054}</string>
+						<string>{414, 487.80405}</string>
 						<string>{193.92592, 594.38885}</string>
 					</array>
 					<key>Style</key>
@@ -19573,7 +19573,7 @@ delete_at          : datetime\
 					<real>-1</real>
 					<key>Points</key>
 					<array>
-						<string>{947.22656, 729}</string>
+						<string>{947.22656, 743}</string>
 						<string>{855, 995.84039}</string>
 					</array>
 					<key>Style</key>
@@ -19619,7 +19619,7 @@ delete_at          : datetime\
 					<key>Points</key>
 					<array>
 						<string>{855, 968.21265}</string>
-						<string>{920.44873, 729.48218}</string>
+						<string>{918.41376, 743.4812}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -19662,7 +19662,7 @@ delete_at          : datetime\
 					<key>Points</key>
 					<array>
 						<string>{891.68945, 594}</string>
-						<string>{693.45197, 500.21234}</string>
+						<string>{693.45557, 504.31717}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -19707,7 +19707,7 @@ delete_at          : datetime\
 					<key>Points</key>
 					<array>
 						<string>{297, 980.84717}</string>
-						<string>{245.46672, 729}</string>
+						<string>{245.46672, 743}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -19743,8 +19743,8 @@ delete_at          : datetime\
 					<integer>0</integer>
 					<key>Points</key>
 					<array>
-						<string>{540.49982, 1020.5131}</string>
-						<string>{611.50018, 1018.4839}</string>
+						<string>{540.49982, 1020.5139}</string>
+						<string>{611.50018, 1018.485}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -19997,7 +19997,7 @@ modified_at     : datetime}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{810, 715}, {225, 14}}</string>
+							<string>{{810, 715}, {225, 28}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -20026,7 +20026,8 @@ modified_at     : datetime}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 -}</string>
+\f0\fs24 \cf0 status()\
+commands()}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -20225,8 +20226,8 @@ modified_at     : datetime\
 					<real>-1</real>
 					<key>Points</key>
 					<array>
-						<string>{247.10892, 593.5}</string>
-						<string>{414, 509.9978}</string>
+						<string>{247.10892, 594}</string>
+						<string>{414, 523.38898}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -21169,7 +21170,7 @@ modified_at : datetime}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{126, 715}, {207, 14}}</string>
+							<string>{{126, 715}, {207, 28}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -21203,7 +21204,8 @@ modified_at : datetime}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 -}</string>
+\f0\fs24 \cf0 status()\
+commands()}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -21313,7 +21315,7 @@ modified_at           : datetime}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{414, 343}, {279, 182}}</string>
+							<string>{{414, 343}, {279, 196}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -21342,19 +21344,20 @@ modified_at           : datetime}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 enroll_in_account\
-enrolled_in_account?\
-withdraw_from_account\
-enroll_in_project\
-enrolled_in_project?\
-withdraw_from_project\
-system_admin?\
-make_project_admin(project)\
-project_admin(project))\
-make_account_admin(account)\
-account_admin?(account)\
-query_account_projects(account)\
-create_account(account_name)}</string>
+\f0\fs24 \cf0 query_memberships()\
+has_password()\
+authenticate()\
+authenticate_with_salt()\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -51653,8 +51656,8 @@ analysis}</string>
 					<integer>1553</integer>
 					<key>Points</key>
 					<array>
-						<string>{2121.9285, 858.83575}</string>
-						<string>{2141.1406, 859.08234}</string>
+						<string>{2121.9285, 858.78021}</string>
+						<string>{2141.1406, 859.01672}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -52311,8 +52314,8 @@ analysis}</string>
 					<integer>1534</integer>
 					<key>Points</key>
 					<array>
-						<string>{2077.8494, 825.68353}</string>
-						<string>{2137.207, 827.49591}</string>
+						<string>{2077.8494, 825.68262}</string>
+						<string>{2137.207, 827.49451}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -53968,8 +53971,8 @@ Leverage UX talent}</string>
 					<integer>1490</integer>
 					<key>Points</key>
 					<array>
-						<string>{1821.1764, 1273.3188}</string>
-						<string>{1858.3522, 1277.7853}</string>
+						<string>{1821.1764, 1273.3103}</string>
+						<string>{1858.4762, 1277.7853}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -54288,8 +54291,8 @@ Leverage UX talent}</string>
 					<integer>1481</integer>
 					<key>Points</key>
 					<array>
-						<string>{2117.0972, 1066.0981}</string>
-						<string>{2193.0884, 1076.188}</string>
+						<string>{2117.0974, 1066.0981}</string>
+						<string>{2193.0886, 1076.188}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -55320,7 +55323,7 @@ Leverage UX talent}</string>
 					<key>Points</key>
 					<array>
 						<string>{1147.1478, 783.7984}</string>
-						<string>{1176.0043, 802.55225}</string>
+						<string>{1176.0042, 802.55225}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -57521,8 +57524,8 @@ architecture track}</string>
 					<integer>1337</integer>
 					<key>Points</key>
 					<array>
-						<string>{1380.514, 719.91852}</string>
-						<string>{1363.0701, 711.06573}</string>
+						<string>{1380.5142, 719.91852}</string>
+						<string>{1363.0706, 711.06573}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -59165,8 +59168,8 @@ architecture track}</string>
 					<integer>1347</integer>
 					<key>Points</key>
 					<array>
-						<string>{383.0101, 691.94672}</string>
-						<string>{460.57211, 756.09473}</string>
+						<string>{383.01013, 691.94678}</string>
+						<string>{460.57202, 756.09467}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -60859,11 +60862,11 @@ architecture track}</string>
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
-		<integer>0</integer>
+		<integer>1</integer>
 		<key>ExpandedCanvases</key>
 		<array/>
 		<key>Frame</key>
-		<string>{{0, 0}, {1680, 1028}}</string>
+		<string>{{41, 0}, {1639, 1028}}</string>
 		<key>ListView</key>
 		<false/>
 		<key>OutlineWidth</key>
@@ -60877,9 +60880,9 @@ architecture track}</string>
 		<key>SidebarWidth</key>
 		<integer>137</integer>
 		<key>VisibleRegion</key>
-		<string>{{553.13586, 317.21835}, {1109.1753, 633.71082}}</string>
+		<string>{{0.95129377, 175.03806}, {1414.5739, 830.47937}}</string>
 		<key>Zoom</key>
-		<real>2.869999885559082</real>
+		<real>2.190000057220459</real>
 		<key>ZoomValues</key>
 		<array>
 			<array>

@@ -116,21 +116,74 @@ describe "Accounts#Show " do
   end
 
   describe "TEAM" do
-    it "should show a list of users sponsored by this account" do
-      pending
+    before (:each) do
+      @users = []
+      3.times do |n|
+        @users << create_user
+        create_sponsorship(@account, @users[n], @user)
+      end      
+      
+    end
+    it "should show a link back to SHOW PROJECTS" do
+      click_link("#{@account.name}")
+      click_link("SHOW TEAM")
+      page.should have_selector("a", :href => account_path(@account), :text => "SHOW PROJECTS")
+    end
+    it "should show a list of users" do
+      click_link("#{@account.name}")
+      click_link("SHOW TEAM")
+      page.should have_selector("td.index_item", :count=>4)
     end
     it "should not show a user that isn't in this account" do
-      pending
+      @users << create_user
+      click_link("#{@account.name}")
+      click_link("SHOW TEAM")
+      page.should have_selector("td.index_item", :count=>4)
+      page.should_not have_selector("td.index_item", :text => "#{@users.last.name}")
     end
-    it "should not show invite user dialog" do
-      pending
-    end      
-    it "should suspend a user from the account" do
-      pending
+
+    describe "where current user is not account admin" do
+      before (:each) do
+        @sponsorship = User.find(@user.id).sponsorships.where(:account_id => @account.id).first
+        @sponsorship.current_user_id = @user.id
+        @sponsorship.demote_access
+        click_link("#{@account.name}")
+        click_link("SHOW TEAM")
+      end
+      it "should not show invite user dialog" do
+        page.should_not have_field('sponsorship_user_email')
+      end     
+      it "should not show suspend command on items" do
+        item = page.find('td.index_item', :text => "#{@users.last.name}")
+        item.should_not have_link('Suspend')
+      end 
     end
-    it "should add another user" do
-      pending
+    
+    describe "where current user is account admin" do
+      before (:each) do
+        click_link  "#{@account.name}"    
+        click_link("SHOW TEAM")
+      end
+      it "should show invite user dialog" do
+        page.should have_field('sponsorship_user_email')  
+      end
+      it "should uninvite a user from the account" do
+        item = page.find('td.index_item', :text => "#{@users.last.name}")
+        item.should have_link('Uninvite')
+        item.click_link('Uninvite')
+        item = page.find('td.index_item', :text => "#{@users.last.name}")
+        item.should have_link('Invite')
+      end
+      it "should add another user" do
+        @users << create_user
+        page.find_by_id 'sponsorship_user_email'
+        fill_in "sponsorship_user_email", :with => "#{@users.last.email}"
+        click_button "Invite"
+        page.should have_selector("div.flash.success", :text => "#{@users.last.name}")        
+        page.should have_selector("td.index_item", :count=>5)
+        item = page.find('td.index_item', :text => "#{@users.last.name}")
+        item.should have_link('Uninvite')
+      end
     end
   end
-
 end

@@ -65,9 +65,6 @@ describe Account do
     it "should include: Account#sponsorships" do
       @account.should respond_to(:sponsorships)
     end    
-    it "should include: Account#team_members" do
-      @account.should respond_to(:team_members)
-    end    
     it "should include: Account#project" do
       @account.should respond_to(:projects)
     end    

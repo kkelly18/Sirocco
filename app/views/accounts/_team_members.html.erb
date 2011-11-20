@@ -1,4 +1,16 @@
-<% if @account.team_members.count > 0 %>
-  <%= render :partial => "team_member", :collection => @team_members %>
-  <%= will_paginate @team_members %>		
-<% end %>
+<tr>
+  <td class="index_item">
+	<%= gravatar_for(sponsorship.user, :size => 30) %>
+	<% sponsorship.current_user_id = @current_user.id %>
+    <span class="item_link" >
+      <%= link_to sponsorship.user.name, user_path(sponsorship.user.id) %>
+    </span>
+	<span class="item_commands" >
+	  <%= render :partial => 'accounts/sponsorship_command', :collection => sponsorship.commands %>	  
+	</span>
+    <br/>
+	<span class="item_status">
+	  <%= sponsorship.status %>
+	</span>
+  </td>
+</tr>

@@ -55,6 +55,7 @@ class User < ActiveRecord::Base
     end
     state :active do
     end
+    
     state :sys_admin do
     end
     state :suspended do
@@ -78,19 +79,6 @@ class User < ActiveRecord::Base
     (user && user.salt == cookie_salt) ? user : nil
   end
 
-  def account_admin?(account)
-    sponsorships.find_by_account_id(account).access_admin?
-  end
-
-  def account_projects(account)
-    project_array = calc_account_projects(account)
-    memberships.in_the_set_of(project_array)
-
-    #example usage 
-    #project_list = current_user.account_projects (current_account)
-    #project_list.each {|s| puts s.project.name}
-  end
-
   def query_memberships(account=nil)
     if account
       project_array = calc_account_projects(account)
@@ -104,39 +92,34 @@ class User < ActiveRecord::Base
 
   private  
 
-  def encrypt_password
-    self.salt = make_salt unless has_password?(password)
-    self.encrypted_password = encrypt(password)
-  end
+    def encrypt_password
+      self.salt = make_salt unless has_password?(password)
+      self.encrypted_password = encrypt(password)
+    end
+    def encrypt(string)
+      secure_hash("#{salt}--#{string}")
+    end
+    def make_salt
+      secure_hash("#{Time.now.utc}--#{password}")
+    end
+    def secure_hash(string)
+      Digest::SHA2.hexdigest(string)
+    end
+    def calc_account_projects (account)
 
-  def encrypt(string)
-    secure_hash("#{salt}--#{string}")
-  end
+      u = self.memberships
+      u_array = []
+      u.each {|s| u_array << s.project_id}
 
-  def make_salt
-    secure_hash("#{Time.now.utc}--#{password}")
-  end
+      a = account.projects
+      a_array = []
+      a.each {|s| a_array << s.id}
 
-  def secure_hash(string)
-    Digest::SHA2.hexdigest(string)
-  end
-
-  def calc_account_projects (account)
-
-    u = self.memberships
-    u_array = []
-    u.each {|s| u_array << s.project_id}
-
-    a = account.projects
-    a_array = []
-    a.each {|s| a_array << s.id}
-
-    return a_array & u_array
-  end
-
-  def create_personal_account
-    @personal_account = Account.new(:name => @personal_account_name, :created_by => self.id, :current_user_id => self.id)
-    @personal_account.save
-  end
+      return a_array & u_array
+    end
+    def create_personal_account
+      @personal_account = Account.new(:name => @personal_account_name, :created_by => self.id, :current_user_id => self.id)
+      @personal_account.save
+    end
 
 end

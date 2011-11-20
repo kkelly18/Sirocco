@@ -10,7 +10,6 @@ class MembershipsController < ApplicationController
   end
 
   def update
-    #todo implement command pattern
     membership = Membership.find(params[:id])
     membership.current_user_id = @current_user.id
     command = params[:command]

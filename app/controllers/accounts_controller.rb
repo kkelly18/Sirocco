@@ -5,31 +5,37 @@ class AccountsController < ApplicationController
     @title        = "Account"
     @current_user = current_user
     @account      = Account.find(params[:id])
-    @new_project  = @account.projects.build
-    @memberships  = @current_user.query_memberships(@account).paginate(:per_page => 6, :page => params[:page])
 
     @command = params[:command]
     case 
       when @command == nil || @command =~ /PROJECTS/i 
+        @memberships  = @current_user.query_memberships(@account).paginate(:per_page => 6, :page => params[:page])
         @items_text = 'SHOW TEAM'
         @items_command = 'TEAM'
         if current_user_is_account_admin?
+          @new_project          = @account.projects.build
           @command_form_partial = 'projects/new_project'
         else
           @command_form_partial = nil
         end
         @items_partial = 'projects/index'
       when @command =~ /TEAM/i
-        @team_members = @account.team_members.paginate(:per_page => 6, :page => params[:page])
+        @sponsorships = @account.sponsorships.paginate(:per_page => 6, :page => params[:page])
         @items_text = 'SHOW PROJECTS'
         @items_command = 'PROJECTS'
-        @command_form_partial = 'accounts/invite_user'
-        @invited_user = Sponsorship.new
-        @items_partial = 'accounts/team_members'
+        if current_user_is_account_admin?
+          @invited_user         = Sponsorship.new
+          @command_form_partial = 'accounts/invite_user'
+        else
+          @command_form_partial = nil
+        end
+        @items_partial = 'users/index'
       else
+        @memberships  = @current_user.query_memberships(@account).paginate(:per_page => 6, :page => params[:page])
         @items_text = 'SHOW TEAM'
         @items_command = 'TEAM'
         if current_user_is_account_admin?(@account)
+          @new_project  = @account.projects.build
           @command_form_partial = 'projects/new_project'
         else
           @command_form_partial = nil

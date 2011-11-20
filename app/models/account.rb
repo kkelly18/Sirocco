@@ -4,13 +4,10 @@ class Account < ActiveRecord::Base
   has_many :sponsorships, :foreign_key => "account_id",
                         :dependent => :destroy  
                                   
-  has_many :team_members, :through => :sponsorships, 
-                        :source => :user  
-  
   has_many :projects, :foreign_key => "account_id",
                        :dependent => :destroy
                        
-  before_create :update_sponsorship
+  before_create :make_creator_a_sponsor
                               
   validates :name,  
             :presence => true
@@ -37,7 +34,7 @@ class Account < ActiveRecord::Base
   end
             
   private
-    def update_sponsorship
+    def make_creator_a_sponsor
       s = self.sponsorships.build(:account_id => 1,
                                   :user_id    => self.created_by, 
                                   :created_by => self.created_by,

@@ -1,0 +1,6 @@
+<% if @sponsorships.any? %>
+  <table class="index_grid">
+    <%= render :partial => 'accounts/team_members', :collection => @sponsorships, :as => :sponsorship %>
+  </table>
+  <%= will_paginate @sponsorships %>
+<% end %>
