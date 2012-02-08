@@ -7,7 +7,7 @@ gem "pg", "~> 0.11.0"
 gem "state_machine", "~> 1.0.2"
 
 group :development, :test do
-  gem "rspec-rails", "~> 2.6.1"
+  gem "rspec-rails", "~> 2.7.0"
   gem "capybara", "~> 1.1.1"
   gem "launchy", "~> 2.0.5"
   gem "factory_girl_rails", "~> 1.2.0"

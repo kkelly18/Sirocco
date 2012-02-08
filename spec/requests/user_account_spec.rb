@@ -3,7 +3,7 @@ require 'spec_models_helper'
 
 #TOOL: save_and_open_page
 
-describe "Accounts#Show " do
+describe "Accounts#Show" do
   before(:each) do
     @user        = create_user
     @account     = create_account(@user) # a new account, in addition to the personal account
@@ -20,7 +20,7 @@ describe "Accounts#Show " do
     fill_in      "Email",    :with => @user.email
     fill_in      "Password", :with => @user.password  
     click_button "Sign in"
-    click_link   "SHOW ACCOUNTS"
+    click_link   "MY ACCOUNTS"
   end
 
   describe "ACCOUNTS" do
@@ -127,7 +127,7 @@ describe "Accounts#Show " do
     it "should show a link back to SHOW PROJECTS" do
       click_link("#{@account.name}")
       click_link("SHOW TEAM")
-      page.should have_selector("a", :href => account_path(@account), :text => "SHOW PROJECTS")
+      page.should have_link("SHOW PROJECTS", :href => "#{account_path(@account)}?command=PROJECTS")
     end
     it "should show a list of users" do
       click_link("#{@account.name}")
@@ -158,7 +158,6 @@ describe "Accounts#Show " do
         item.should_not have_link('Suspend')
       end 
     end
-    
     describe "where current user is account admin" do
       before (:each) do
         click_link  "#{@account.name}"    

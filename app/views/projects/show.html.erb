@@ -1,8 +1,11 @@
 <table>
-	<h1><%= @project.name %></h1>
+  <h1><%= @project.name %></h1>
     <div class="span-24">
-	<nav class="product">
-	</nav>
+      <nav class="product">
+	    <ul>
+	      <li><%= link_to 'Home', user_path(current_user) %></li>
+        </ul>
+	  </nav>
 	</div>
 	<br/>
 	<div class="action span-24">

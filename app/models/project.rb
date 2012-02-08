@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :name, :created_by, :account_id, :suspend_at
+  attr_accessible :name, :created_by, :account_id
   
   has_many :memberships,          :foreign_key => "project_id",
                                   :dependent   => :destroy  
@@ -31,6 +31,7 @@ class Project < ActiveRecord::Base
     event :remove do
       transition :suspended => :removed
     end
+    
     state :active do
     end
     state :suspended do

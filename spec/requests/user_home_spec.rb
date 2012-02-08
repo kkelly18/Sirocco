@@ -45,26 +45,27 @@ describe "User#Home" do
     page.should have_selector('title', :text => "Home")    
   end
 
-  it "should show a list of accounts when 'SHOW ACCOUNTS' clicked " do
-    user = Factory(:user)
+  it "should show a list of accounts when 'MY ACCOUNTS' clicked " do
+    @user = Factory(:user)
     3.times do
-      account = Factory(:account) #use as the personal account
-      sponsorship = Factory(:sponsorship, :account_id => account.id, :user_id => user.id, :created_by => user.id, :current_user_id => user.id)
-      project = Factory(:project, :account_id => account.id, :created_by => user.id)
+      @account = Factory(:account) #use as the personal account
+      @sponsorship = Factory(:sponsorship, :account_id => @account.id, :user_id => @user.id, :created_by => @user.id, :current_user_id => @user.id)
+      @project = Factory(:project, :account_id => @account.id, :created_by => @user.id)
       #memberships are created during active record callbacks
     end    
     visit root_path               
     click_link "Sign in"          
 
     page.should have_selector('title', :text => "Signin")  
-    fill_in "Email",    :with => user.email
-    fill_in "Password", :with => user.password  
+    fill_in "Email",    :with => @user.email
+    fill_in "Password", :with => @user.password  
     click_button "Sign in"
 
-    page.should have_selector('title', :text => "Home")    
-    page.should have_selector("nav li a", :href => accounts_path, :content => "SHOW ACCOUNTS")    
+    page.should have_selector('title', :text => "Home")
+    page.should have_link("MY ACCOUNTS", :href => "#{user_path(@user)}?command=ACCOUNTS" )    
 
-    click_link "SHOW ACCOUNTS"
-    page.should have_selector("nav li a", :href => projects_path, :content => "SHOW PROJECTS")    
+    click_link "MY ACCOUNTS"
+    page.should have_link("MY PROJECTS",  :href => "#{user_path(@user)}?command=PROJECTS"  )    
+
   end
 end

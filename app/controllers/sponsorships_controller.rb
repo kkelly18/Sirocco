@@ -3,8 +3,8 @@ class SponsorshipsController < ApplicationController
   
   def create
     sponsorship = Sponsorship.new(params[:sponsorship])
-    sponsorship.current_user_id = @current_user.id
-    if sponsorship.save!
+    sponsorship.current_user_id = sponsorship.created_by = current_user.id
+    if sponsorship.save
       flash[:success] = "Added #{sponsorship.user.name}"
       redirect_to :back
     end    
@@ -26,6 +26,5 @@ class SponsorshipsController < ApplicationController
     end
     redirect_to :back 
   end
-
   
 end

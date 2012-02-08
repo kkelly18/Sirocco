@@ -6,7 +6,7 @@
       <%= link_to sponsorship.user_id, user_path(sponsorship.user_id) %>
     </span>
 	<span class="item_commands" >
-	  <%= render :partial => 'accounts/sponsorship_command', :collection => sponsorship.commands %>	  
+	  <%= render :partial => 'sponsorships/sponsorship_command', :collection => sponsorship.commands %>	  
 	</span>
     <br/>
 	<span class="item_status">

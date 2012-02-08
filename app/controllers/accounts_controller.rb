@@ -25,7 +25,7 @@ class AccountsController < ApplicationController
         @items_command = 'PROJECTS'
         if current_user_is_account_admin?
           @invited_user         = Sponsorship.new
-          @command_form_partial = 'accounts/invite_user'
+          @command_form_partial = 'invite_user_to_account'
         else
           @command_form_partial = nil
         end

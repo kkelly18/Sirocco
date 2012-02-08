@@ -5,7 +5,7 @@
       <%= link_to sponsorship.account.name, account_path(sponsorship.account.id) %>
     </span>
 	<span class="item_commands" >
-	  <%= render :partial => 'accounts/sponsorship_command', :collection => sponsorship.commands %>	  
+	  <%= render :partial => 'sponsorships/sponsorship_command', :collection => sponsorship.commands %>	  
 	</span>
     <br/>
 	<span class="item_status">
