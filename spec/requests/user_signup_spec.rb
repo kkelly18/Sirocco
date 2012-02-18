@@ -127,6 +127,7 @@ describe "New user signup" do
       click_button "Sign up"                
       page.should have_selector('li',  :text => 'Password doesn\'t match confirmation')
     
+      fill_in   "Password",         :with => first_user.password
       fill_in   "Confirm Password", :with => first_user.password_confirmation
       click_button "Sign up"
                       
