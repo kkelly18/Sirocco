@@ -1,42 +1,47 @@
+$full-width: 710px;
+$background-color: #ECF1EF;
+$link-color: #09c;
+$visited-link-color: #069;
+
 .container {
 	margin-top: 1%;	
 }
 
 body {
-	background: #ECF1EF;
+	background: $background-color;
 }
 
 header {
-}
-
-header img.system_logo {	
-	padding: 0.5em;
-	background: #7C8C74;
-	text-indent: -5000px;
-	width: 30%;	
+	img.system_logo {	
+		padding: 0.5em;
+		background: #7C8C74;
+		text-indent: -5000px;
+		width: 30%;
+	}
 }
 
 a {
-	color: #09c;
+	color: $link-color;
 	text-decoration: none;
+
+	&:hover {
+		color: $link-color;
+		text-decoration: underline;
+	}
+
+	&:visited {
+		color: $visited-link-color;
+	}
 }
 
-a:hover {
-	color: #069;
-	text-decoration: underline;
-}
-
-a:visited {
-	color: #069;
-}
 
 section {
 	padding: 1%;
 	background: #fff;
-}
 
-section h1 a {
-	color: black;
+	h1 a {
+		color: black;
+	}
 }
 
 nav {
@@ -44,32 +49,30 @@ nav {
 	background: white;
 	padding: 0 0.2em;
 	white-space: nowrap;
-}
 
-nav ul {
+  ul {
 	margin: 0;
 	padding: 0;
-}
 
-nav ul li {
-	list-style-type: none;
-	display: inline-block;
-	padding: 0.2em 0;
+	li {
+		list-style-type: none;
+		display: inline-block;
+		padding: 0.2em 0;
+		
+	  a {
+		padding: 0 5px;
+		font-weight: bold;			
+		&:visited {
+		  color: #09c;
+		}
+		&:hover {
+		  text-decoration: underline;
+		}
+	  }
+	
+	}
+  }
 }
-
-nav ul li a {
-	padding: 0 5px;
-	font-weight: bold;
-}
-
-nav ul li a:visited {
-	color: #09c;
-}
-
-nav ul li a:hover {
-	text-decoration: underline;
-}
-
 
 /* Sign up button */
 
@@ -85,7 +88,11 @@ a.signup_button {
 	font-weight: bold;
 	padding: 20px;
 }
-
+.round {
+	-moz-border-radius: 	10px;
+	-webkit-border-radius: 	10px;
+	border-radius: 			10px;
+}
 
 div.field, div.actions {
 	margin-bottom: 10px;
@@ -130,12 +137,6 @@ div.field, div.actions {
 #error_explanation ul li {
 	font-size: 12px;
 	list-style: square;
-}
-
-.round {
-	-moz-border-radius: 	10px;
-	-webkit-border-radius: 	10px;
-	border-radius: 			10px;
 }
 
 /* users index */
