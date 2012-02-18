@@ -1,4 +1,5 @@
-	<a href="#"><img class="system_logo round" src="/images/logo.png"></a>
+<% logo = image_tag("logo.png", alt: "Sirocco App", class: "system_logo round") %>
+<%= link_to logo, root_path %>
 	  <nav class="round">
 		  <ul>
 		  <% if signed_in? %>
