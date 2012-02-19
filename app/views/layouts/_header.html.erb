@@ -1,21 +1,18 @@
-<% logo = image_tag("logo.png", alt: "Sirocco App", class: "system_logo round") %>
+<% logo = image_tag("logo.png", alt: "Sirocco App", class: "system_logo") %>
 <%= link_to logo, root_path %>
-	  <nav class="round">
-		  <ul>
-		  <% if signed_in? %>
-			<li>
-			  <%= gravatar_for current_user, :size => 20 %>
-			  <a href="<%= edit_user_path(current_user) %>",>
-			    <span class="user_name" >
-			      <%= current_user.name %>
-			    </span>
-		      </a>
-			</li>
-		  <% end %>
-		  <% if signed_in? %>			
-			  <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
-		  <% else %>
-			  <li><%= link_to "Sign in", signin_path %></li>
-		  <% end %>
-		</ul>
-	  </nav>
+
+<nav id="sys-nav">
+  <ul>
+	  <% if signed_in? %>
+		<li>
+		  <%= gravatar_for current_user, :size => 30 %>
+		  <%= link_to current_user.name, edit_user_path(current_user) %>			
+		</li>
+	  <% end %>
+	  <% if signed_in? %>			
+		  <li><%= link_to "Sign out", signout_path, method: :delete %></li>
+	  <% else %>
+		  <li><%= link_to "Sign in", signin_path %></li>
+	  <% end %>
+  </ul>
+</nav>

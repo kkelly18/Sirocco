@@ -1,20 +1,24 @@
 <table>
   <h1><%= @project.name %></h1>
-    <div class="span-24">
-      <nav class="product">
-	    <ul>
+
+  <nav id="product-nav">
+	 <div class="span-24">
+		<ul>
 	      <li><%= link_to 'Home', user_path(current_user) %></li>
         </ul>
-	  </nav>
 	</div>
-	<br/>
-	<div class="action span-24">
-	<nav class="action">
+  </nav>
+
+  <br/>
+
+	<nav id="action-nav">
+		<div class="span-24">
 		<ul>
 		  <li><%= link_to @items_text, project_path(:command=>@items_command) %></li>
 		</ul>
+  	  </div>	
 	</nav>
-	</div>	
+
 	<tr>
 		<% if @command_form_partial %>
   		  <td class="sidebar">

@@ -1,20 +1,24 @@
-<table>
 	<h1><%= @account.name %></h1>
-    <div class="span-24">
-	<nav class="product">
-  	  <ul>
-		<li><%= link_to 'Home', user_path(current_user) %></li>
-	  </ul>
+
+	<nav id="product-nav">
+	  <div class="span-24">
+  	    <ul>
+		  <li><%= link_to 'Home', user_path(current_user) %></li>
+	    </ul>
+  	  </div>
 	</nav>
-	</div>
+
 	<br/>
-	<div class="action span-24">
-	<nav class="action">
+
+	<nav id="action-nav">
+  	  <div class="span-24">
 		<ul>
 		  <li><%= link_to @items_text, account_path(:command=>@items_command) %></li>
 		</ul>
+  	  </div>	
 	</nav>
-	</div>	
+
+<table>
 	<tr>
 		<% if @command_form_partial %>
   		  <td class="sidebar">

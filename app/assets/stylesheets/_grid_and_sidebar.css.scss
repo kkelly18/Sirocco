@@ -1,0 +1,38 @@
+td.main {
+	width: 70%;
+	vertical-align: top;
+}
+
+td.sidebar {
+	width: 30%;
+	padding-top: 10px;
+	vertical-align: top;
+}
+
+.index_grid {
+}
+
+.index_grid_row {
+  height:         70px;
+  border-top:     1px solid #ccc;
+  vertical-align: top;
+  padding-top:    10px;	
+}
+
+.item_link {	
+  display:   inline;
+  font-size: larger;
+  font-weight: bold;
+  color:     #666;
+}
+
+.item_status {
+  display:   inline; 
+  font-style: italic;
+  color:     #666;
+}
+
+.item_commmands {	
+  font-size: 33%;
+  color:     black;
+}

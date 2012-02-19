@@ -3,20 +3,25 @@ $background-color: #ECF1EF;
 $link-color: #09c;
 $visited-link-color: #069;
 
-.container {
-	margin-top: 1%;	
-}
+@import "mixins";
+@import "navbars";
+@import "grid_and_sidebar";
+@import "signup_button";
 
 body {
 	background: $background-color;
+}
+
+section.container {
+	margin-top: 1%;
+	@include rounded(10px)	
 }
 
 header {
 	img.system_logo {	
 		padding: 0.5em;
 		background: #7C8C74;
-		text-indent: -5000px;
-		width: 30%;
+		@include rounded(10px)
 	}
 }
 
@@ -37,61 +42,7 @@ a {
 
 section {
 	padding: 1%;
-	background: #fff;
-
-	h1 a {
-		color: black;
-	}
-}
-
-nav {
-	float: right;
 	background: white;
-	padding: 0 0.2em;
-	white-space: nowrap;
-
-  ul {
-	margin: 0;
-	padding: 0;
-
-	li {
-		list-style-type: none;
-		display: inline-block;
-		padding: 0.2em 0;
-		
-	  a {
-		padding: 0 5px;
-		font-weight: bold;			
-		&:visited {
-		  color: #09c;
-		}
-		&:hover {
-		  text-decoration: underline;
-		}
-	  }
-	
-	}
-  }
-}
-
-/* Sign up button */
-
-a.signup_button {
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
-	text-align: center;
-	width: 190px;
-	color: #fff;
-	background: #006400;
-	font-size: 150%;
-	font-weight: bold;
-	padding: 20px;
-}
-.round {
-	-moz-border-radius: 	10px;
-	-webkit-border-radius: 	10px;
-	border-radius: 			10px;
 }
 
 div.field, div.actions {
@@ -150,79 +101,4 @@ ul.users {
 }
 /* end users index */
 
-/* products Nav */
-.product {
-	background: white;
-}
-div.product {
-	margin: 0.2em;
-}
-nav.product {	
-	color: black;	
-	float: left;
-	margin: 0;
-	padding: 0.2em;
-}
-nav.product ul li a {
-	color: black;
-}/* end products Nav */
 
-/* actions Nav */
-.action {
-	background: #BEBEBE;	
-}
-div.action {
-	margin: 0.2em;
-}
-nav.action {	
-	float: right;
-	margin: 0;
-	padding: 0.2em;
-}
-nav.action ul li a {
-	color: black;
-	font-size: smaller;
-}
-/* end actions Nav */
-
-/* grid item */
-td.main {
-	width: 70%;
-	padding: 1em;
-}
-
-td.sidebar {
-	width: 30%;
-	padding: 1em;
-	vertical-align: top;
-}
-
-.index_grid {
-  margin-top: 1em;
-}
-
-.index_grid_row {
-  height:         70px;
-  border-top:     1px solid #ccc;
-  vertical-align: top;
-  padding-top:    10px;	
-}
-
-.item_link {	
-  display:   inline;
-  font-size: larger;
-  font-weight: bold;
-  color:     #666;
-}
-
-.item_status {
-  display:   inline; 
-  font-style: italic;
-  color:     #666;
-}
-
-.item_commmands {	
-  font-size: 33%;
-  color:     black;
-}
-/* end grid item */

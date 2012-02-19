@@ -1,27 +1,30 @@
-<table>
-	<h1></h1>
+<h1></h1>
 
-    <div class="span-24">
-	<nav class="product">
-	</nav>
+<nav class="product">
+	<div class="span-24">
 	</div>
-	<br/>
-	<div class="action span-24">
-	<nav class="action">
-		<ul>
-		  <li><%= link_to @items_text, user_path(:command=>@items_command) %></li>
-		</ul>
-	</nav>
-	</div>
+</nav>
+
+<br/>
+
+<nav id="action-nav">
+  <div class="span-24">
+  <ul>
+    <li><%= link_to @items_text, user_path(command: @items_command) %></li>
+  </ul>
+  </div>
+</nav>
 	
-	<tr>
-		<% if @command_form_partial %>
-		<td class="sidebar">
-			<%= render @command_form_partial %>
-		</td>
-		<% end %>
-		<td class="main">
-		  <%= render @items_partial %>
-		</td>
-	</tr>
+<table>
+  <tr>
+    <% if @command_form_partial %>
+      <td class="sidebar">
+        <%= render @command_form_partial %>
+      </td>
+    <% end %>
+		
+	<td class="main">
+		<%= render @items_partial %>
+	</td>
+  </tr>
 </table>
