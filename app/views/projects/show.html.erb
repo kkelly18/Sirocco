@@ -1,34 +1,35 @@
+<h1><%= @project.name %></h1>
+
+<nav id="product-nav">
+  <div class="span-24">
+    <ul>
+	  <li><%= link_to 'Home', user_path(current_user) %></li>
+    </ul>
+  </div>
+</nav>
+
+<br/>
+
+<nav id="action-nav">
+  <div class="span-24">
+    <ul>
+      <li><%= link_to @items_text, project_path(command: @items_command) %></li>
+	</ul>
+  </div>	
+</nav>
+	
 <table>
-  <h1><%= @project.name %></h1>
+  <tr>
+    <% if @command_form_partial %>
+  	  <td class="sidebar">
+        <%= render @command_form_partial %>
+	  </td>
+	<% end %>
 
-  <nav id="product-nav">
-	 <div class="span-24">
-		<ul>
-	      <li><%= link_to 'Home', user_path(current_user) %></li>
-        </ul>
-	</div>
-  </nav>
-
-  <br/>
-
-	<nav id="action-nav">
-		<div class="span-24">
-		<ul>
-		  <li><%= link_to @items_text, project_path(:command=>@items_command) %></li>
-		</ul>
-  	  </div>	
-	</nav>
-
-	<tr>
-		<% if @command_form_partial %>
-  		  <td class="sidebar">
-			<%= render @command_form_partial %>
-		  </td>
-		<% end %>
-		<td class="main">
-			<% if @items_partial %>
-			  <%= render @items_partial %>
-			<% end %>
-		</td>
-	</tr>
+	<td class="grid">
+	  <% if @items_partial %>
+	    <%= render @items_partial %>
+      <% end %>
+    </td>
+  </tr>
 </table>

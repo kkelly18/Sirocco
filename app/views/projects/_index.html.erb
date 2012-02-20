@@ -1,6 +1,6 @@
 <% if @memberships.any? %>
-  <table class="index_grid">
-    <%= render :partial => 'memberships/membership', :collection => @memberships %>
+  <table>
+    <%= render partial: 'memberships/membership', collection: @memberships %>
   </table>
   <%= will_paginate @memberships %>
 <% end %>

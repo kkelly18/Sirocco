@@ -1,22 +1,16 @@
-td.main {
-	width: 70%;
+td.grid {
+	width: 66%;
 	vertical-align: top;
 }
 
 td.sidebar {
-	width: 30%;
+	width: 33%;
 	padding-top: 10px;
 	vertical-align: top;
 }
 
-.index_grid {
-}
-
-.index_grid_row {
-  height:         70px;
-  border-top:     1px solid #ccc;
-  vertical-align: top;
-  padding-top:    10px;	
+td.item {
+	/* tests depend on this id */
 }
 
 .item_link {	

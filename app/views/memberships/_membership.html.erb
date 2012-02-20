@@ -1,11 +1,11 @@
 <tr>
-  <td class="index_item">
+  <td class="item">
 	<% membership.current_user_id = @current_user.id %>
     <span class="item_link" >
       <%= link_to membership.project.name, project_path(membership.project_id) %>
     </span>
 	<span class="item_commands" >
-	  <%= render :partial => 'memberships/membership_command', :collection => membership.commands %>	  
+	  <%= render partial: 'memberships/membership_command', collection: membership.commands %>	  
 	</span>
     <br/>
 	<span class="item_status">

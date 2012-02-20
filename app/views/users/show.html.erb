@@ -23,8 +23,10 @@
       </td>
     <% end %>
 		
-	<td class="main">
-		<%= render @items_partial %>
+	<td class="grid">
+		<% if @items_partial %>
+		  <%= render @items_partial %>
+	    <% end %>
 	</td>
   </tr>
 </table>
