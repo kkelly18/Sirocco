@@ -1,3 +1,9 @@
+@mixin rounded($radius: 10px) {
+	-moz-border-radius: 	$radius;
+	-webkit-border-radius: 	$radius;
+	border-radius: 			$radius;
+}
+
 #signup_button {
 	margin-left: auto;
 	margin-right: auto;

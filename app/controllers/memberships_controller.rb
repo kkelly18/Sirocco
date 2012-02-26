@@ -5,10 +5,9 @@ class MembershipsController < ApplicationController
     membership = Membership.new(params[:membership])
     if membership.save
       redirect_to :back
-    end
-    
+    end    
   end
-
+  
   def update
     membership = Membership.find(params[:id])
     membership.current_user_id = @current_user.id
