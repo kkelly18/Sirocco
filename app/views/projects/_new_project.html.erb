@@ -3,10 +3,10 @@
   <%= f.label :name, "Name new project" %><br />
   <%= f.text_field :name %> <br />
 </div>
-<%= f.hidden_field :created_by, :value => @current_user.id%>
-<%= f.hidden_field :account_id, :value => @account.id%>
+  <%= f.hidden_field :created_by, :value => @current_user.id%>
+  <%= f.hidden_field :account_id, :value => @account.id%>
 <div class="actions">
-	<%= f.submit "Create" %>
+  <%= f.submit "Create" %>
 </div>
 <% end %>	
 

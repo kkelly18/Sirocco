@@ -1,0 +1,6 @@
+<% if @memberships.any? %>
+  <table class="index_grid">
+    <%= render partial: "memberships/team_members", collection: @memberships, as: "membership" %>
+  </table>
+  <%= will_paginate @memberships %>
+<% end %>

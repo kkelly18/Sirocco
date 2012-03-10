@@ -5,25 +5,53 @@ module SessionsHelper
     self.current_user = user
   end
   
+  def project_sign_in(project)
+    cookies[:remember_project] = {value: project.id,
+                                  expires: 20.days.from_now.utc}
+    self.current_project = project 
+  end
+  
   def sign_out
     cookies.delete(:remember_token)
     self.current_user = nil
+    project_sign_out
+  end
+  
+  def project_sign_out
+    cookies.delete(:remember_project)
+    self.current_project = nil
   end
   
   def current_user=(user)
-    @current_user = user_from_remember_token
+    @current_user = user
   end
   
   def current_user
     @current_user ||= user_from_remember_token
   end
   
+  def current_project=(project)
+    @current_project = project
+  end
+  
+  def current_project
+    @current_project ||= project_from_remember_project
+  end
+    
   def signed_in?
     !current_user.nil?
+  end
+
+  def signed_into_project?
+    !current_project.nil?
   end
   
   def current_user?(user)
     user == current_user
+  end
+  
+  def current_project?(project)
+    project == current_project
   end
   
   def authenticate
@@ -48,6 +76,10 @@ module SessionsHelper
     
     def remember_token
       cookies.signed[:remember_token] || [nil, nil]
+    end
+    
+    def project_from_remember_project
+      cookies[:remember_project] || nil
     end
     
     def store_location

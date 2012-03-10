@@ -5,19 +5,20 @@ class UsersController < ApplicationController
     @title = "Home"
     @current_user = current_user
     @command = params[:command]
+    project_sign_out #navigating away from a specific project
     case 
       when @command == nil || @command =~ /PROJECTS/i
-        #@list_partial
-        #@list_data
         @items_partial        = 'projects/index'
         @memberships          = @current_user.memberships.paginate(:per_page => 8, :page => params[:page])
 
-        #@commands[{:text, :command}]
         @items_text           = 'MY ACCOUNTS'
         @items_command        = 'ACCOUNTS'
 
-        #@partials[[:template, :meta{}]]
         @command_form_partial = nil
+        
+        if @memberships.empty?          
+          redirect_to account_path(@current_user.sponsorships.first.account_id) #personal account created when user created
+        end
       when @command =~ /ACCOUNTS/i
         @items_partial        = 'accounts/index'
         @sponsorships         = @current_user.sponsorships.paginate(:per_page => 8, :page => params[:page])

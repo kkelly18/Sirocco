@@ -62,7 +62,6 @@ describe "Accounts#Show" do
       item = page.find('td.item', :text => "#{@projects[0].name}")
       item.click_link('Withdraw')
       item = page.find('td.item', :text => "#{@projects[0].name}")
-      save_and_open_page
       item.find('a', :text => 'Rejoin')
     end
 

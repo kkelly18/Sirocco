@@ -1,16 +1,16 @@
 <tr>
   <td class="item">
-	<% sponsorship.current_user_id = @current_user.id %>
-	<%= gravatar_for team_member, :size => 30 %>
+	<% membership.current_user_id = @current_user.id %>
+	<%= gravatar_for membership.user, :size => 30 %>
     <span class="item_link" >
-      <%= link_to sponsorship.user_id, user_path(sponsorship.user_id) %>
+      <%= link_to membership.user.name, user_path(membership.user_id) %>
     </span>
 	<span class="item_commands" >
-	  <%= render :partial => 'sponsorships/sponsorship_command', :collection => sponsorship.commands %>	  
+	  <%= render partial: 'memberships/membership_command', collection: membership.commands %>	  
 	</span>
     <br/>
 	<span class="item_status">
-	  <%= sponsorship.status %>
+	  <%= membership.status %>
 	</span>
   </td>
 </tr>

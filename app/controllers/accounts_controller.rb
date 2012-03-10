@@ -29,8 +29,8 @@ class AccountsController < ApplicationController
         else
           @command_form_partial = nil
         end
-        @items_partial = 'users/index'
-      else
+        @items_partial = 'sponsorships/account_team_members_index'
+       else
         @memberships  = @current_user.query_memberships(@account).paginate(:per_page => 6, :page => params[:page])
         @items_text = 'SHOW TEAM'
         @items_command = 'TEAM'

@@ -17,56 +17,57 @@ describe "Projects#Show " do
 
     visit root_path               
     click_link   "Sign in"               
-    fill_in      "Email",    :with => @user.email
-    fill_in      "Password", :with => @user.password  
+    fill_in      "Email",    with: @user.email
+    fill_in      "Password", with: @user.password  
     click_button "Sign in"
   end
 
-  describe "PROJECTS" do
-    it "should navigate back to HOME from Accounts#Show" do
-      pending
-      click_link   "#{@project[0].name}"
+  describe "MY PROJECT -" do
+    it "should navigate from HOME to Projects#Show" do
+      click_link   "#{@projects[0].name}"
+      page.should have_selector('title', text: "Project")
+      page.should have_link( "Home", href: "#{user_path(@user)}")
+    end
+
+    it "should navigate from HOME to Projects#Show back to HOME" do
+      click_link   "#{@projects[0].name}"
       click_link "Home"
-      page.should have_selector('title', :text => "Home")
+      page.should have_selector('title', text: "Home")
     end
-    it "should show three accounts" do
-      pending
-      page.should have_selector("td.index_item", :count=>2)
+
+    it "should navigate signedin user back to their last project" do
+      click_link   "#{@projects[0].name}"
+      visit root_path
+      page.should have_selector('title', text: "Project")
+      page.should have_selector('h1', text: "#{@projects[0].name}")
+      page.should have_link("Home", href: "#{user_path(@user)}")
+      page.should have_link("SHOW TEAM")
     end
-    it "should navigate signedin user to a project" do
+    
+    it "should navigate to HOME when user has lost auth for signed-in project" do
       pending
+    end
+    
+    it "should navigate to HOME if cookie has expired" do
+      pending
+    end
+
+    it "should have an account name link" do
+      click_link   "#{@projects[0].name}"
+      page.should have_link( "#{@account.name}", href: "#{account_path(@account)}")
+    end
+    
+    it "should navigate to account projects index when account link clicked" do
+      click_link   "#{@projects[0].name}"
       click_link   "#{@account.name}"
-      page.should have_selector('title',:text => "Account")
-      page.should have_selector('h1',:text => "#{@account.name}")
-      page.should have_selector("a", :href => user_path(@user), :text => "Home")    
-      page.should have_selector("a", :href => account_path(@account), :text => "SHOW TEAM")
+      page.should have_selector('title', text: "Account")
     end
-    it "should navigate back to HOME from Project#Show" do
-      pending
+    
+    it "should navigate to account projects index and back" do
+      click_link   "#{@projects[0].name}"
       click_link   "#{@account.name}"
-      click_link "Home"
-      page.should have_selector('title', :text => "Home")
-    end
-    it "should show a list of current user's projects" do
-      pending
-      click_link   "#{@account.name}"
-      page.should have_selector("td.index_item", :count=>3)
-    end
-    it "should only show current users projects" do
-      pending
-      new_account     = create_account(@user)
-      different_sponsorship_same_user = create_sponsorship(new_account, @user, @user)
-      new_project_same_user_sponsored_by_new_account = create_sponsored_project(new_account, @user)
-      click_link   "#{@account.name}"
-      page.should have_selector("td.index_item", :count=>3)
-    end
-    it "should enable withdraw commmand" do
-      pending
-      click_link   "#{@account.name}"
-      item = page.find('td.index_item', :text => "#{@projects[0].name}")
-      item.click_link('Withdraw')
-      item = page.find('td.index_item', :text => "#{@projects[0].name}")
-      item.find('a', :text => 'Rejoin')
+      click_link   "#{@projects[0].name}"      
+      page.should have_selector('title', text: "Project")
     end
 
     describe "where current user is not project admin" do
@@ -91,34 +92,31 @@ describe "Projects#Show " do
     end
   end
 
-  describe "TEAM" do
+  describe "clicking MY TEAM -" do
     before (:each) do
       @users = []
-#      3.times do |n|
-#        @users << create_user
-#        create_sponsorship(@account, @users[n], @user)
-#        create_membershiip(@project[0], @users[n], @user)
-#      end      
-      
+      3.times do |n|
+        @users << create_user
+        create_sponsorship(@account, @users[n], @user)
+        create_membership(@projects[0], @users[n], @user)
+      end      
+      click_link "#{@projects[0].name}"
+      click_link "SHOW TEAM"
     end
-    it "should show a link back to SHOW ACCOUNTS" do
-      pending
-      click_link("#{@account.name}")
-      click_link("SHOW TEAM")
-      page.should have_selector("a", :href => account_path(@account), :text => "SHOW PROJECTS")
+    
+    it "should have a working link to PROJECT HOME" do
+      page.should have_link("SHOW PROJECT")
+      click_link "SHOW PROJECT"
+      page.should have_selector('title', text: "Project")
     end
+    
     it "should show a list of project members" do
-      pending
-      click_link("#{@account.name}")
-      click_link("SHOW TEAM")
-      page.should have_selector("td.index_item", :count=>4)
+      page.should have_selector("td.item", :count=>4)
     end
+    
     it "should not show a user that isn't in this project" do
-      pending
       @users << create_user
-      click_link("#{@account.name}")
-      click_link("SHOW TEAM")
-      page.should have_selector("td.index_item", :count=>4)
+      page.should have_selector("td.item", :count=>4)
       page.should_not have_selector("td.index_item", :text => "#{@users.last.name}")
     end
 
